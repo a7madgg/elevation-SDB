@@ -7,16 +7,15 @@ import type { Provider, ServiceCategory, SaudiCity } from '@/types'
 import { SectionHeader, DemoDataBadge } from '@/components/ui/Misc'
 import { ProviderCard } from '@/components/ai/ProviderCard'
 import { ConnectionModal } from '@/components/ai/ConnectionModal'
-import { formatCompact, pluralizeCategory, cn } from '@/lib/utils'
-
-const allCategories: ServiceCategory[] = ['Marketing', 'Design', 'Technology', 'Accounting', 'Legal', 'Consulting', 'Packaging', 'Logistics', 'Photography', 'Manufacturing', 'Retail']
-const allCities: SaudiCity[] = ['Riyadh', 'Jeddah', 'Dammam', 'Abha', 'Medina', 'Al Khobar', 'Makkah', 'Tabuk']
+import { formatCompact, cn } from '@/lib/utils'
+import { catLabel, cityLabel, saudiCities, serviceCategories, typePlural, useT } from '@/i18n'
 
 export default function Discover() {
   const [query, setQuery] = useState('')
   const [category, setCategory] = useState<ServiceCategory | 'All'>('All')
   const [city, setCity] = useState<SaudiCity | 'All'>('All')
   const [connectTarget, setConnectTarget] = useState<Provider | null>(null)
+  const { t } = useT()
 
   const filtered = useMemo(() => {
     return providers.filter((p) => {
@@ -32,10 +31,10 @@ export default function Discover() {
   return (
     <div className="mx-auto max-w-6xl px-4 pt-4 pb-10 sm:px-6 lg:px-8 lg:pt-2">
       <SectionHeader
-        eyebrow="Ecosystem"
-        title="Discover the SDB Ecosystem"
-        description="Browse the businesses, freelancers and startups financed by SDB — and find the ones that can help you grow."
-        action={<DemoDataBadge label="Demo data" />}
+        eyebrow={t('discover.eyebrow')}
+        title={t('discover.title')}
+        description={t('discover.desc')}
+        action={<DemoDataBadge label={t('common.demoData')} />}
       />
 
       <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
@@ -48,7 +47,7 @@ export default function Discover() {
             className="rounded-2xl border border-sdb-deep/[0.08] bg-white p-4"
           >
             <p className="text-[20px] font-extrabold text-sdb-deep">{formatCompact(cat.count)}</p>
-            <p className="mt-0.5 text-[12px] text-[#6b7a83] leading-tight">{pluralizeCategory(cat.category)}</p>
+            <p className="mt-0.5 text-[12px] text-[#6b7a83] leading-tight">{typePlural(t, cat.category)}</p>
           </motion.div>
         ))}
       </div>
@@ -59,26 +58,26 @@ export default function Discover() {
           <input
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search businesses, freelancers, services…"
+            placeholder={t('discover.search')}
             className="flex-1 bg-transparent text-[14px] text-sdb-deep placeholder:text-[#a7b3ba] outline-none"
           />
         </div>
 
         <div className="flex flex-wrap gap-2">
-          <FilterChip active={category === 'All'} onClick={() => setCategory('All')}>All services</FilterChip>
-          {allCategories.map((c) => (
-            <FilterChip key={c} active={category === c} onClick={() => setCategory(c)}>{c}</FilterChip>
+          <FilterChip active={category === 'All'} onClick={() => setCategory('All')}>{t('discover.allServices')}</FilterChip>
+          {serviceCategories.map((c) => (
+            <FilterChip key={c} active={category === c} onClick={() => setCategory(c)}>{catLabel(t, c)}</FilterChip>
           ))}
         </div>
         <div className="flex flex-wrap gap-2">
-          <FilterChip active={city === 'All'} onClick={() => setCity('All')} tone="slate">All cities</FilterChip>
-          {allCities.map((c) => (
-            <FilterChip key={c} active={city === c} onClick={() => setCity(c)} tone="slate">{c}</FilterChip>
+          <FilterChip active={city === 'All'} onClick={() => setCity('All')} tone="slate">{t('discover.allCities')}</FilterChip>
+          {saudiCities.map((c) => (
+            <FilterChip key={c} active={city === c} onClick={() => setCity(c)} tone="slate">{cityLabel(t, c)}</FilterChip>
           ))}
         </div>
       </div>
 
-      <p className="mt-5 text-[12.5px] text-[#95a2a9]">{filtered.length} results</p>
+      <p className="mt-5 text-[12.5px] text-[#95a2a9]">{t('common.results', { count: filtered.length })}</p>
       <div className="mt-3 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {filtered.map((p, i) => (
           <ProviderCard key={p.id} provider={p} index={i} onConnect={setConnectTarget} />

@@ -6,15 +6,17 @@ import { InsightPanel } from '@/components/employee/InsightPanel'
 import { CityDistributionChart } from '@/components/charts/CityDistributionChart'
 import { WellbeingTrendChart } from '@/components/charts/WellbeingTrendChart'
 import { TransformationStory } from '@/components/story/TransformationStory'
+import { useT } from '@/i18n'
 
 export default function Insights() {
+  const { t } = useT()
   return (
     <div className="mx-auto max-w-6xl px-4 pt-4 pb-14 sm:px-6 lg:px-8 lg:pt-2">
       <SectionHeader
-        eyebrow="Insights"
-        title="Ecosystem Insights"
-        description="AI-generated, aggregated observations across the beneficiary ecosystem."
-        action={<DemoDataBadge label="Simulated demo data" />}
+        eyebrow={t('employee.insEyebrow')}
+        title={t('employee.insTitle')}
+        description={t('employee.insDesc')}
+        action={<DemoDataBadge label={t('common.simulated')} />}
       />
 
       <div className="mt-6">
@@ -24,15 +26,15 @@ export default function Insights() {
       <div className="mt-5 grid gap-5 lg:grid-cols-2">
         <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
           <Card className="p-6">
-            <p className="text-[13px] font-bold text-sdb-deep mb-1">Beneficiary distribution by city</p>
-            <p className="text-[12px] text-[#95a2a9] mb-2">Simulated demo data</p>
+            <p className="text-[13px] font-bold text-sdb-deep mb-1">{t('employee.cityDist')}</p>
+            <p className="text-[12px] text-[#95a2a9] mb-2">{t('common.simulated')}</p>
             <CityDistributionChart />
           </Card>
         </motion.div>
         <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 }}>
           <Card className="p-6">
-            <p className="text-[13px] font-bold text-sdb-deep mb-1">Financial wellbeing trend</p>
-            <p className="text-[12px] text-[#95a2a9] mb-2">Aggregated ecosystem average</p>
+            <p className="text-[13px] font-bold text-sdb-deep mb-1">{t('employee.wellbeingTrend')}</p>
+            <p className="text-[12px] text-[#95a2a9] mb-2">{t('employee.wellbeingSubShort')}</p>
             <WellbeingTrendChart />
           </Card>
         </motion.div>

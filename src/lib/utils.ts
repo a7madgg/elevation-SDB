@@ -1,11 +1,13 @@
 import { clsx, type ClassValue } from 'clsx'
+import type { Language } from '@/types'
 
 export function cn(...inputs: ClassValue[]) {
   return clsx(inputs)
 }
 
-export function formatSAR(amount: number): string {
-  return `SAR ${Math.round(amount).toLocaleString('en-US')}`
+export function formatSAR(amount: number, language: Language = 'en'): string {
+  const n = Math.round(amount).toLocaleString('en-US')
+  return language === 'ar' ? `${n} ر.س` : `SAR ${n}`
 }
 
 export function formatCompact(n: number): string {

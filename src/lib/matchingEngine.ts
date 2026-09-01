@@ -1,8 +1,7 @@
 import { providers } from '@/data/providers'
-import type { Provider, ServiceCategory, MatchExplanation } from '@/types'
+import type { Language, Provider, ServiceCategory, MatchExplanation } from '@/types'
+import { catLower, cityLabel, translate, type TranslateFn } from '@/i18n'
 
-// Deterministic keyword -> service category map, used by the mock AI matching
-// engine so the demo works fully offline without any external API key.
 const KEYWORD_MAP: Record<string, ServiceCategory[]> = {
   instagram: ['Marketing'],
   'social media': ['Marketing'],
@@ -32,6 +31,34 @@ const KEYWORD_MAP: Record<string, ServiceCategory[]> = {
   contract: ['Legal'],
   consulting: ['Consulting'],
   strategy: ['Consulting'],
+  انستغرام: ['Marketing'],
+  انستقرام: ['Marketing'],
+  تسويق: ['Marketing'],
+  تسويقي: ['Marketing'],
+  سوشيال: ['Marketing'],
+  محتوى: ['Marketing', 'Photography'],
+  تصوير: ['Photography'],
+  صور: ['Photography'],
+  هوية: ['Design'],
+  شعار: ['Design'],
+  تصميم: ['Design'],
+  تغليف: ['Packaging'],
+  علب: ['Packaging'],
+  علبة: ['Packaging'],
+  توصيل: ['Logistics'],
+  شحن: ['Logistics'],
+  لوجست: ['Logistics'],
+  موقع: ['Technology'],
+  تطبيق: ['Technology'],
+  تقنية: ['Technology'],
+  محاسبة: ['Accounting'],
+  فواتير: ['Accounting'],
+  ضريبة: ['Accounting'],
+  قانوني: ['Legal'],
+  عقود: ['Legal'],
+  عقد: ['Legal'],
+  استشار: ['Consulting'],
+  استراتيجية: ['Consulting'],
 }
 
 export function detectCategories(query: string): ServiceCategory[] {
@@ -46,19 +73,42 @@ export function detectCategories(query: string): ServiceCategory[] {
 }
 
 export function detectBudget(query: string): number | null {
-  const match = query.match(/(?:under|below|less than|budget of|max)\s*(?:sar)?\s*(\d{2,6})/i) ||
-    query.match(/sar\s*(\d{2,6})/i)
+  const match =
+    query.match(/(?:under|below|less than|budget of|max|أقل من|تحت|ميزانية)\s*(?:sar|ر\.?س)?\s*(\d{2,6})/i) ||
+    query.match(/(?:sar|ر\.?س|ريال)\s*(\d{2,6})/i) ||
+    query.match(/(\d{2,6})\s*(?:sar|ر\.?س|ريال)/i)
   if (match) {
     return parseInt(match[1], 10)
   }
   return null
 }
 
+const CITY_ALIASES: Record<string, string> = {
+  riyadh: 'Riyadh',
+  jeddah: 'Jeddah',
+  dammam: 'Dammam',
+  abha: 'Abha',
+  medina: 'Medina',
+  khobar: 'Al Khobar',
+  makkah: 'Makkah',
+  tabuk: 'Tabuk',
+  الرياض: 'Riyadh',
+  جدة: 'Jeddah',
+  الدمام: 'Dammam',
+  أبها: 'Abha',
+  ابها: 'Abha',
+  المدينة: 'Medina',
+  الخبر: 'Al Khobar',
+  مكة: 'Makkah',
+  تبوك: 'Tabuk',
+}
+
 export function detectCity(query: string): string | null {
-  const cities = ['riyadh', 'jeddah', 'dammam', 'abha', 'medina', 'khobar', 'makkah', 'tabuk']
   const q = query.toLowerCase()
-  const found = cities.find((c) => q.includes(c))
-  return found ? found[0].toUpperCase() + found.slice(1) : null
+  for (const [alias, city] of Object.entries(CITY_ALIASES)) {
+    if (q.includes(alias)) return city
+  }
+  return null
 }
 
 interface FindMatchesOptions {
@@ -67,14 +117,16 @@ interface FindMatchesOptions {
   city?: string | null
   limit?: number
   query?: string
+  language?: Language
 }
 
 export function findMatches(options: FindMatchesOptions): MatchExplanation[] {
-  const { categories = [], budget, city, limit = 5, query = '' } = options
+  const { categories = [], budget, city, limit = 5, query = '', language = 'en' } = options
+  const t: TranslateFn = (key, vars) => translate(language, key, vars)
 
-  const FOOD_TERMS = ['food', 'bakery', 'bake', 'cafe', 'café', 'restaurant', 'sweets', 'catering', 'kitchen', 'f&b', 'beverage']
+  const FOOD_TERMS = ['food', 'bakery', 'bake', 'cafe', 'café', 'restaurant', 'sweets', 'catering', 'kitchen', 'f&b', 'beverage', 'طعام', 'مخبز', 'مخبز', 'مقهى', 'مطعم', 'حلويات', 'مطبخ']
   const q = query.toLowerCase()
-  const queryMentionsFood = FOOD_TERMS.some((t) => q.includes(t))
+  const queryMentionsFood = FOOD_TERMS.some((term) => q.includes(term))
 
   const scored = providers.map((provider) => {
     let score = 48
@@ -85,23 +137,23 @@ export function findMatches(options: FindMatchesOptions): MatchExplanation[] {
       score += overlap.length === 1 ? 24 : overlap.length * 18
       reasons.push(
         overlap.length === 1
-          ? `Specializes in ${overlap[0].toLowerCase()} services`
-          : `Covers ${overlap.map((c) => c.toLowerCase()).join(' & ')}`,
+          ? t('match.specializes', { cat: catLower(t, overlap[0]) })
+          : t('match.covers', { cats: overlap.map((c) => catLower(t, c)).join(language === 'ar' ? ' و ' : ' & ') }),
       )
     } else if (categories.length > 0) {
       score -= 30
     }
 
     const providerText = `${provider.headline} ${provider.bio}`.toLowerCase()
-    if (queryMentionsFood && FOOD_TERMS.some((t) => providerText.includes(t))) {
+    if (queryMentionsFood && FOOD_TERMS.some((term) => providerText.includes(term))) {
       score += 14
-      reasons.unshift('Specializes in food & beverage businesses and fits your requested budget')
+      reasons.unshift(t('match.foodFit'))
     }
 
     if (budget) {
       if (provider.priceMin <= budget) {
         score += 12
-        reasons.push(`Fits your requested budget of ${budget.toLocaleString()} SAR`)
+        reasons.push(t('match.budgetFit', { amount: budget.toLocaleString('en-US') }))
       } else {
         score -= 18
       }
@@ -109,17 +161,17 @@ export function findMatches(options: FindMatchesOptions): MatchExplanation[] {
 
     if (city && provider.city.toLowerCase() === city.toLowerCase()) {
       score += 8
-      reasons.push(`Based in ${provider.city}, close to you`)
+      reasons.push(t('match.basedIn', { city: cityLabel(t, provider.city) }))
     }
 
     score += (provider.rating - 4.5) * 14
 
     if (provider.rating >= 4.8) {
-      reasons.push(`Highly rated at ${provider.rating.toFixed(1)}★ across ${provider.reviewCount} reviews`)
+      reasons.push(t('match.highlyRated', { rating: provider.rating.toFixed(1), count: provider.reviewCount }))
     }
 
     if (provider.isSdbBeneficiary) {
-      reasons.push('Fellow SDB-financed beneficiary — keeping value inside the ecosystem')
+      reasons.push(t('match.fellow'))
     }
 
     score = Math.max(8, Math.min(98, score))

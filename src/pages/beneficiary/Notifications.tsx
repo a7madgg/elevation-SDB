@@ -5,6 +5,7 @@ import { SectionHeader } from '@/components/ui/Misc'
 import { Card } from '@/components/ui/Card'
 import { useApp } from '@/state/AppContext'
 import { cn } from '@/lib/utils'
+import { useT, type TranslationKey } from '@/i18n'
 
 const kindIcon = {
   match: Sparkles,
@@ -22,15 +23,16 @@ const kindColor = {
 
 export default function Notifications() {
   const { notifications, markAllNotificationsRead } = useApp()
+  const { t } = useT()
 
   useEffect(() => {
-    const t = setTimeout(markAllNotificationsRead, 900)
-    return () => clearTimeout(t)
+    const timer = setTimeout(markAllNotificationsRead, 900)
+    return () => clearTimeout(timer)
   }, [markAllNotificationsRead])
 
   return (
     <div className="mx-auto max-w-2xl px-4 pt-4 pb-10 sm:px-6 lg:px-8 lg:pt-2">
-      <SectionHeader eyebrow="Notifications" title="Notifications" description="Updates on opportunities, connections and your financial health." />
+      <SectionHeader eyebrow={t('notifications.eyebrow')} title={t('notifications.title')} description={t('notifications.desc')} />
 
       <div className="mt-6 flex flex-col gap-3">
         {notifications.map((n, i) => {
@@ -43,9 +45,9 @@ export default function Notifications() {
                   <Icon size={16} />
                 </div>
                 <div className="min-w-0 flex-1">
-                  <p className="text-[13.5px] font-semibold text-sdb-deep">{n.title}</p>
-                  <p className="mt-0.5 text-[12.5px] text-[#6b7a83] leading-relaxed">{n.description}</p>
-                  <p className="mt-1 text-[11px] text-[#a7b3ba]">{n.time}</p>
+                  <p className="text-[13.5px] font-semibold text-sdb-deep">{t(`notifications.${n.id}.title` as TranslationKey)}</p>
+                  <p className="mt-0.5 text-[12.5px] text-[#6b7a83] leading-relaxed">{t(`notifications.${n.id}.desc` as TranslationKey)}</p>
+                  <p className="mt-1 text-[11px] text-[#a7b3ba]">{t(`notifications.${n.id}.time` as TranslationKey)}</p>
                 </div>
                 {!n.read && <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-sdb-cyan" />}
               </Card>

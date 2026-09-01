@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowUp, Loader2 } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
-import { interpretQuery, promptSuggestions, type AiResponse } from '@/lib/aiEngine'
+import { interpretQuery, promptSuggestionsFor, type AiResponse } from '@/lib/aiEngine'
 import type { MatchExplanation, Provider } from '@/types'
 import { AiGlyph, Skeleton } from '@/components/ui/Misc'
 import { Button } from '@/components/ui/Button'
@@ -10,6 +10,7 @@ import { MatchCard } from './MatchCard'
 import { AgenticFlow } from './AgenticFlow'
 import { ConnectionModal } from './ConnectionModal'
 import { sleep, cn } from '@/lib/utils'
+import { catLower, useT } from '@/i18n'
 
 interface ConversationTurn {
   id: string
@@ -25,13 +26,15 @@ export function AiConsole({ initialQuery }: { initialQuery?: string }) {
   const [connectNote, setConnectNote] = useState<string | undefined>(undefined)
   const submittedInitial = useRef(false)
   const navigate = useNavigate()
+  const { t, language } = useT()
+  const suggestions = promptSuggestionsFor(language)
 
   async function handleSubmit(query: string) {
     if (!query.trim() || thinking) return
     setInput('')
     setThinking(true)
     await sleep(650)
-    const response = interpretQuery(query)
+    const response = interpretQuery(query, language)
     setTurns((prev) => [...prev, { id: `${Date.now()}`, query, response }])
     setThinking(false)
   }
@@ -48,15 +51,15 @@ export function AiConsole({ initialQuery }: { initialQuery?: string }) {
     if (id === 'open-copilot') {
       navigate('/beneficiary/copilot')
     } else if (id === 'find-provider' || id === 'find-partner') {
-      handleSubmit(response.categories.length ? `Find more ${response.categories[0].toLowerCase()} providers` : 'Find a provider for my business')
+      handleSubmit(response.categories.length ? t('assistant.findMore', { cat: catLower(t, response.categories[0]) }) : t('assistant.findProviderFallback'))
     } else if (id === 'estimate-budget') {
-      handleSubmit('Estimate a budget for this service')
+      handleSubmit(t('assistant.estimateBudgetQuery'))
     } else if (id === 'optimize-budget') {
       navigate('/beneficiary/copilot')
     } else if (id === 'savings-plan') {
       navigate('/beneficiary/savings')
     } else if (id === 'create-plan') {
-      handleSubmit('Create a simple marketing plan for my business')
+      handleSubmit(t('assistant.marketingPlanQuery'))
     }
   }
 
@@ -72,9 +75,9 @@ export function AiConsole({ initialQuery }: { initialQuery?: string }) {
           <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-sdb-cyan/[0.12] text-sdb-cyan animate-pulse-slow">
             <AiGlyph size={24} />
           </div>
-          <p className="mt-4 text-[17px] font-bold text-sdb-deep">Ask me anything about growing your business</p>
+          <p className="mt-4 text-[17px] font-bold text-sdb-deep">{t('assistant.emptyTitle')}</p>
           <p className="mt-1.5 text-[13.5px] text-[#6b7a83] max-w-md mx-auto">
-            I can find providers, explain why they're a fit, connect you directly, or help manage your finances.
+            {t('assistant.emptyBody')}
           </p>
         </motion.div>
       )}
@@ -99,13 +102,13 @@ export function AiConsole({ initialQuery }: { initialQuery?: string }) {
         className="sticky bottom-4 lg:bottom-6"
       >
         <div className="flex items-end gap-2 rounded-2xl border border-sdb-deep/[0.1] bg-white p-2 shadow-[0_12px_40px_-16px_rgba(13,64,102,0.3)]">
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-sdb-cyan/[0.1] text-sdb-cyan ml-1">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-sdb-cyan/[0.1] text-sdb-cyan ms-1">
             <AiGlyph size={18} />
           </div>
           <input
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="What do you need help with?"
+            placeholder={t('assistant.placeholder')}
             className="flex-1 resize-none bg-transparent py-2.5 text-[14.5px] text-sdb-deep placeholder:text-[#a7b3ba] outline-none"
           />
           <Button type="submit" size="md" disabled={thinking || !input.trim()} className="!rounded-xl h-10 w-10 !p-0">
@@ -114,7 +117,7 @@ export function AiConsole({ initialQuery }: { initialQuery?: string }) {
         </div>
         {turns.length === 0 && (
           <div className="mt-3 flex flex-wrap gap-2">
-            {promptSuggestions.map((s) => (
+            {suggestions.map((s) => (
               <button
                 key={s}
                 type="button"
@@ -147,7 +150,7 @@ function ConversationTurnView({
   return (
     <div className="flex flex-col gap-4">
       <div className="flex justify-end">
-        <div className="max-w-[80%] rounded-2xl rounded-tr-sm bg-sdb-deep px-4 py-2.5 text-[13.5px] text-white">{query}</div>
+        <div className="max-w-[80%] rounded-2xl rounded-se-sm bg-sdb-deep px-4 py-2.5 text-[13.5px] text-white">{query}</div>
       </div>
 
       <div className="flex items-start gap-3">
@@ -155,7 +158,7 @@ function ConversationTurnView({
           <AiGlyph size={15} />
         </div>
         <div className="flex-1 min-w-0">
-          <div className="max-w-[85%] rounded-2xl rounded-tl-sm bg-[#f6f9fa] px-4 py-3">
+          <div className="max-w-[85%] rounded-2xl rounded-ss-sm bg-[#f6f9fa] px-4 py-3">
             <p className="text-[14px] font-semibold text-sdb-deep">{response.headline}</p>
             {response.detail && <p className="mt-1 text-[13px] text-[#6b7a83] leading-relaxed">{response.detail}</p>}
           </div>

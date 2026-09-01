@@ -2,6 +2,7 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 import { AppLayout } from '@/components/layout/AppLayout'
 import { beneficiaryNav, employeeNav } from '@/components/layout/navConfig'
 import { useApp } from '@/state/AppContext'
+import { useT } from '@/i18n'
 import { ToastContainer } from '@/components/ui/ToastContainer'
 import { currentBeneficiary } from '@/data/beneficiary'
 
@@ -27,12 +28,13 @@ import Insights from '@/pages/employee/Insights'
 
 function BeneficiaryLayout({ children }: { children: React.ReactNode }) {
   const { role } = useApp()
+  const { t } = useT()
   if (role !== 'beneficiary') return <Navigate to="/login" replace />
   return (
     <AppLayout
       items={beneficiaryNav}
-      name={currentBeneficiary.name}
-      subtitle={currentBeneficiary.businessName}
+      name={t('brand.saraName')}
+      subtitle={t('brand.saraBusiness')}
       avatarColor={currentBeneficiary.avatarColor}
       initials={currentBeneficiary.initials}
       notificationsPath="/beneficiary/notifications"
@@ -44,16 +46,17 @@ function BeneficiaryLayout({ children }: { children: React.ReactNode }) {
 
 function EmployeeLayout({ children }: { children: React.ReactNode }) {
   const { role } = useApp()
+  const { t } = useT()
   if (role !== 'employee') return <Navigate to="/login" replace />
   return (
     <AppLayout
       items={employeeNav}
-      name="Faisal Al-Mutairi"
-      subtitle="SDB Ecosystem Team"
+      name={t('brand.employeeName')}
+      subtitle={t('brand.employeeTeam')}
       avatarColor="#44546A"
       initials="FM"
       notificationsPath="/employee"
-      topTitle="Ecosystem Intelligence · Demo environment"
+      topTitle={t('brand.topTitle')}
     >
       {children}
     </AppLayout>

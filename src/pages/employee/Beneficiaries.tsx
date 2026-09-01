@@ -8,35 +8,34 @@ import { Card } from '@/components/ui/Card'
 import { Badge } from '@/components/ui/Badge'
 import { Avatar } from '@/components/ui/Avatar'
 import { cn } from '@/lib/utils'
-
-const categories: ServiceCategory[] = ['Marketing', 'Design', 'Technology', 'Accounting', 'Legal', 'Consulting', 'Packaging', 'Logistics', 'Photography', 'Manufacturing', 'Retail']
+import { catLabel, cityLabel, serviceCategories, typeLabel, useT } from '@/i18n'
 
 export default function Beneficiaries() {
   const [filter, setFilter] = useState<ServiceCategory | 'All'>('All')
+  const { t } = useT()
 
   const filtered = useMemo(() => (filter === 'All' ? providers : providers.filter((p) => p.categories.includes(filter))), [filter])
 
   return (
     <div className="mx-auto max-w-6xl px-4 pt-4 pb-10 sm:px-6 lg:px-8 lg:pt-2">
       <SectionHeader
-        eyebrow="Beneficiaries"
-        title="Active Businesses"
-        description="A privacy-aware view of businesses in the ecosystem — no personal financial data is shown here."
-        action={<DemoDataBadge />}
+        eyebrow={t('employee.benEyebrow')}
+        title={t('employee.benTitle')}
+        description={t('employee.benDesc')}
+        action={<DemoDataBadge label={t('common.demoEnv')} />}
       />
 
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mt-5 flex items-start gap-2.5 rounded-xl border border-sdb-deep/[0.08] bg-[#f6fbfc] p-4">
         <ShieldCheck size={16} className="text-sdb-cyan mt-0.5 shrink-0" />
         <p className="text-[12.5px] leading-relaxed text-[#526270]">
-          This view only shows business names, categories and public profile information beneficiaries have opted to share. Individual financial data is never
-          shown to employees — analytics elsewhere in this dashboard are aggregated and anonymized by design.
+          {t('employee.privacy')}
         </p>
       </motion.div>
 
       <div className="mt-5 flex flex-wrap gap-2">
-        <FilterChip active={filter === 'All'} onClick={() => setFilter('All')}>All</FilterChip>
-        {categories.map((c) => (
-          <FilterChip key={c} active={filter === c} onClick={() => setFilter(c)}>{c}</FilterChip>
+        <FilterChip active={filter === 'All'} onClick={() => setFilter('All')}>{t('common.all')}</FilterChip>
+        {serviceCategories.map((c) => (
+          <FilterChip key={c} active={filter === c} onClick={() => setFilter(c)}>{catLabel(t, c)}</FilterChip>
         ))}
       </div>
 
@@ -48,16 +47,16 @@ export default function Beneficiaries() {
                 <Avatar initials={p.initials} color={p.avatarColor} size={42} />
                 <div className="min-w-0 flex-1">
                   <p className="truncate text-[14px] font-bold text-sdb-deep">{p.name}</p>
-                  <p className="text-[12px] text-[#6b7a83]">{p.type}</p>
+                  <p className="text-[12px] text-[#6b7a83]">{typeLabel(t, p.type)}</p>
                 </div>
               </div>
               <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-[12px] text-[#6b7a83]">
                 <span className="flex items-center gap-1"><Star size={11} className="fill-[#F0B93E] text-[#F0B93E]" /> {p.rating.toFixed(1)}</span>
-                <span className="flex items-center gap-1"><MapPin size={11} /> {p.city}</span>
+                <span className="flex items-center gap-1"><MapPin size={11} /> {cityLabel(t, p.city)}</span>
               </div>
               <div className="mt-3 flex flex-wrap gap-1.5">
                 {p.categories.map((c) => (
-                  <Badge key={c} tone="cyan">{c}</Badge>
+                  <Badge key={c} tone="cyan">{catLabel(t, c)}</Badge>
                 ))}
               </div>
             </Card>

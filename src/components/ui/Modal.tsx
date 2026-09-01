@@ -46,7 +46,7 @@ export function Modal({ open, onClose, children, title, maxWidth = 480 }: ModalP
             {!title && (
               <button
                 onClick={onClose}
-                className="absolute top-4 right-4 rounded-full p-1.5 text-[#7c8990] hover:bg-[#f1f4f5] hover:text-sdb-deep transition-colors cursor-pointer z-10"
+                className="absolute top-4 end-4 rounded-full p-1.5 text-[#7c8990] hover:bg-[#f1f4f5] hover:text-sdb-deep transition-colors cursor-pointer z-10"
               >
                 <X size={18} />
               </button>

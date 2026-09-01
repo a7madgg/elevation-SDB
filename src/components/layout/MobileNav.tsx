@@ -1,8 +1,10 @@
 import { NavLink } from 'react-router-dom'
 import type { NavItem } from './navConfig'
 import { cn } from '@/lib/utils'
+import { useT } from '@/i18n'
 
 export function MobileNav({ items }: { items: NavItem[] }) {
+  const { t } = useT()
   const shown = items.slice(0, 5)
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-40 flex items-center justify-around border-t border-sdb-deep/[0.08] bg-white/95 backdrop-blur px-1 py-1.5 lg:hidden">
@@ -23,7 +25,7 @@ export function MobileNav({ items }: { items: NavItem[] }) {
               <span className={cn('flex h-8 w-8 items-center justify-center rounded-full', isActive && 'bg-sdb-deep/[0.08]')}>
                 <item.icon size={17} />
               </span>
-              {item.label.split(' ')[0]}
+              {t(item.labelKey).split(' ')[0]}
             </>
           )}
         </NavLink>

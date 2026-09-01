@@ -1,8 +1,9 @@
 import { motion } from 'framer-motion'
+import { useT, type TranslationKey } from '@/i18n'
 
 interface NodeDef {
   id: string
-  label: string
+  labelKey: TranslationKey
   x: number
   y: number
   color: string
@@ -10,13 +11,13 @@ interface NodeDef {
 }
 
 const nodes: NodeDef[] = [
-  { id: 'family', label: 'Productive Family', x: 18, y: 28, color: '#0D4066', size: 64 },
-  { id: 'marketing', label: 'Marketing Freelancer', x: 52, y: 10, color: '#12B1C6', size: 54 },
-  { id: 'startup', label: 'Startup', x: 82, y: 24, color: '#0074AE', size: 58 },
-  { id: 'packaging', label: 'Packaging Business', x: 12, y: 68, color: '#34B889', size: 50 },
-  { id: 'tech', label: 'Technology Provider', x: 46, y: 82, color: '#70154C', size: 56 },
-  { id: 'logistics', label: 'Logistics Partner', x: 80, y: 70, color: '#F0693E', size: 48 },
-  { id: 'sme', label: 'Small Business', x: 50, y: 46, color: '#0D4066', size: 44 },
+  { id: 'family', labelKey: 'hero.family', x: 18, y: 28, color: '#0D4066', size: 64 },
+  { id: 'marketing', labelKey: 'hero.marketing', x: 52, y: 10, color: '#12B1C6', size: 54 },
+  { id: 'startup', labelKey: 'hero.startup', x: 82, y: 24, color: '#0074AE', size: 58 },
+  { id: 'packaging', labelKey: 'hero.packaging', x: 12, y: 68, color: '#34B889', size: 50 },
+  { id: 'tech', labelKey: 'hero.tech', x: 46, y: 82, color: '#70154C', size: 56 },
+  { id: 'logistics', labelKey: 'hero.logistics', x: 80, y: 70, color: '#F0693E', size: 48 },
+  { id: 'sme', labelKey: 'hero.sme', x: 50, y: 46, color: '#0D4066', size: 44 },
 ]
 
 const edges: [string, string][] = [
@@ -39,6 +40,7 @@ function find(id: string) {
 }
 
 export function NetworkHero() {
+  const { t } = useT()
   return (
     <div className="relative w-full aspect-[6/5] sm:aspect-[4/3]">
       <svg viewBox="0 0 100 100" className="absolute inset-0 h-full w-full overflow-visible" preserveAspectRatio="xMidYMid meet">
@@ -90,7 +92,7 @@ export function NetworkHero() {
             <span className="h-1.5 w-1.5 rounded-full bg-white/80" />
           </motion.div>
           <span className="hidden sm:block whitespace-nowrap rounded-full bg-white/90 px-2.5 py-1 text-[10.5px] font-semibold text-sdb-deep shadow-sm border border-sdb-deep/[0.06]">
-            {node.label}
+            {t(node.labelKey)}
           </span>
         </motion.div>
       ))}

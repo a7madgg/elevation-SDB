@@ -5,9 +5,9 @@ import { Modal } from '@/components/ui/Modal'
 import { Button } from '@/components/ui/Button'
 import { Avatar } from '@/components/ui/Avatar'
 import type { Provider } from '@/types'
-import { currentBeneficiary } from '@/data/beneficiary'
 import { useApp } from '@/state/AppContext'
 import { uid, sleep } from '@/lib/utils'
+import { catLower, localizeProvider, useT } from '@/i18n'
 
 interface ConnectionModalProps {
   provider: Provider | null
@@ -18,36 +18,41 @@ interface ConnectionModalProps {
 
 type Step = 'compose' | 'sending' | 'sent'
 
-function buildMessage(provider: Provider, note?: string): string {
-  const service = provider.categories[0]?.toLowerCase() ?? 'working together'
-  return `Hi ${provider.name.split(' ')[0]}, I'm ${currentBeneficiary.name.split(' ')[0]} from ${currentBeneficiary.businessName}. ${
-    note ?? `I'd love to explore working together on ${service}.`
-  }`
-}
-
 export function ConnectionModal({ provider, open, onClose, contextNote }: ConnectionModalProps) {
   const [step, setStep] = useState<Step>('compose')
   const [message, setMessage] = useState('')
   const [editing, setEditing] = useState(false)
   const { addConnection, pushToast } = useApp()
+  const { t } = useT()
 
   useEffect(() => {
     if (provider && open) {
-      setMessage(buildMessage(provider, contextNote))
+      const service = provider.categories[0] ? catLower(t, provider.categories[0]) : t('connect.workingTogether')
+      const note = contextNote ?? t('connect.defaultNote', { service })
+      setMessage(
+        t('connect.template', {
+          first: provider.name.split(' ')[0],
+          me: t('brand.saraName').split(' ')[0],
+          business: t('brand.saraBusiness'),
+          note,
+        }),
+      )
       setStep('compose')
       setEditing(false)
     }
-  }, [provider, open, contextNote])
+  }, [provider, open, contextNote, t])
 
   if (!provider) return null
+
+  const localized = localizeProvider(provider, t)
 
   async function handleSend() {
     setStep('sending')
     await sleep(1400)
     addConnection({
       id: uid('conn'),
-      providerId: provider!.id,
-      providerName: provider!.name,
+      providerId: provider.id,
+      providerName: provider.name,
       status: 'sent',
       message,
       sentAt: new Date().toISOString(),
@@ -55,14 +60,14 @@ export function ConnectionModal({ provider, open, onClose, contextNote }: Connec
     })
     setStep('sent')
     pushToast({
-      title: 'Connection request sent',
-      description: `We'll remind you to follow up with ${provider!.name} in 3 days.`,
+      title: t('connect.toastTitle'),
+      description: t('connect.toastBody', { name: provider.name }),
       variant: 'success',
     })
   }
 
   return (
-    <Modal open={open} onClose={onClose} title={step === 'compose' ? `Connect with ${provider.name}?` : undefined}>
+    <Modal open={open} onClose={onClose} title={step === 'compose' ? t('connect.title', { name: provider.name }) : undefined}>
       <div className="px-6 pb-6">
         <AnimatePresence mode="wait">
           {step === 'compose' && (
@@ -71,10 +76,10 @@ export function ConnectionModal({ provider, open, onClose, contextNote }: Connec
                 <Avatar initials={provider.initials} color={provider.avatarColor} size={40} />
                 <div>
                   <p className="text-[13.5px] font-bold text-sdb-deep">{provider.name}</p>
-                  <p className="text-[12px] text-[#6b7a83]">{provider.headline}</p>
+                  <p className="text-[12px] text-[#6b7a83]">{localized.headline}</p>
                 </div>
               </div>
-              <p className="text-[11.5px] font-bold uppercase tracking-wide text-[#8996a0] mb-1.5">AI-generated message</p>
+              <p className="text-[11.5px] font-bold uppercase tracking-wide text-[#8996a0] mb-1.5">{t('connect.aiMessage')}</p>
               {editing ? (
                 <textarea
                   value={message}
@@ -88,10 +93,10 @@ export function ConnectionModal({ provider, open, onClose, contextNote }: Connec
               )}
               <div className="mt-5 flex items-center gap-2">
                 <Button variant="outline" size="md" className="flex-1" onClick={() => setEditing((e) => !e)}>
-                  <Pencil size={14} /> {editing ? 'Done editing' : 'Edit message'}
+                  <Pencil size={14} /> {editing ? t('connect.doneEdit') : t('connect.edit')}
                 </Button>
                 <Button variant="primary" size="md" className="flex-1" onClick={handleSend}>
-                  <Send size={14} /> Send connection
+                  <Send size={14} /> {t('connect.send')}
                 </Button>
               </div>
             </motion.div>
@@ -106,7 +111,7 @@ export function ConnectionModal({ provider, open, onClose, contextNote }: Connec
               className="flex flex-col items-center justify-center gap-4 py-10"
             >
               <Loader2 size={30} className="animate-spin text-sdb-cyan" />
-              <p className="text-[14px] font-semibold text-sdb-deep">Sending connection request…</p>
+              <p className="text-[14px] font-semibold text-sdb-deep">{t('connect.sending')}</p>
             </motion.div>
           )}
 
@@ -125,11 +130,11 @@ export function ConnectionModal({ provider, open, onClose, contextNote }: Connec
               >
                 <CheckCircle2 size={32} className="text-sdb-green" />
               </motion.div>
-              <p className="text-[16px] font-bold text-sdb-deep">Connection sent ✓</p>
-              <p className="text-[13.5px] text-[#6b7a83]">Your ecosystem is growing.</p>
-              <p className="text-[12px] text-[#95a2a9] mt-1">We'll remind you to follow up in 3 days.</p>
+              <p className="text-[16px] font-bold text-sdb-deep">{t('connect.sent')}</p>
+              <p className="text-[13.5px] text-[#6b7a83]">{t('connect.growing')}</p>
+              <p className="text-[12px] text-[#95a2a9] mt-1">{t('connect.remind')}</p>
               <Button variant="outline" size="sm" className="mt-4" onClick={onClose}>
-                Close
+                {t('common.close')}
               </Button>
             </motion.div>
           )}

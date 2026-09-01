@@ -15,10 +15,10 @@ const colorMap = {
 }
 
 export function ToastContainer() {
-  const { toasts, dismissToast } = useApp()
+  const { toasts, dismissToast, language } = useApp()
 
   return (
-    <div className="fixed bottom-5 right-5 z-[200] flex flex-col gap-2.5 w-[min(360px,calc(100vw-2.5rem))]">
+    <div className="fixed bottom-5 end-5 z-[200] flex flex-col gap-2.5 w-[min(360px,calc(100vw-2.5rem))]">
       <AnimatePresence>
         {toasts.map((toast) => {
           const Icon = iconMap[toast.variant ?? 'info']
@@ -28,7 +28,7 @@ export function ToastContainer() {
               key={toast.id}
               initial={{ opacity: 0, y: 16, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, x: 40, scale: 0.95 }}
+              exit={{ opacity: 0, x: language === 'ar' ? -40 : 40, scale: 0.95 }}
               transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
               className="flex items-start gap-3 rounded-xl border border-sdb-deep/[0.07] bg-white/95 backdrop-blur px-4 py-3.5 shadow-[0_12px_32px_-8px_rgba(13,64,102,0.25)]"
             >

@@ -1,8 +1,10 @@
 import { NavLink, useNavigate } from 'react-router-dom'
 import { LogOut, Settings, UserRound } from 'lucide-react'
 import { motion } from 'framer-motion'
+import { BrandLockup } from '@/components/brand/SdbLogo'
 import type { NavItem } from './navConfig'
 import { useApp } from '@/state/AppContext'
+import { useT } from '@/i18n'
 import { Avatar } from '@/components/ui/Avatar'
 import { cn } from '@/lib/utils'
 
@@ -17,17 +19,12 @@ interface SidebarProps {
 export function Sidebar({ items, name, subtitle, avatarColor, initials }: SidebarProps) {
   const navigate = useNavigate()
   const { setRole } = useApp()
+  const { t } = useT()
 
   return (
-    <aside className="hidden lg:flex lg:w-[248px] lg:shrink-0 lg:flex-col lg:border-r lg:border-sdb-deep/[0.07] lg:bg-white lg:h-screen lg:sticky lg:top-0">
-      <div className="flex items-center gap-2.5 px-6 pt-6 pb-5">
-        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-sdb-deep">
-          <span className="text-[13px] font-black text-white">S</span>
-        </div>
-        <div className="leading-tight">
-          <p className="text-[14.5px] font-extrabold text-sdb-deep">SDB Connect</p>
-          <p className="text-[10.5px] font-medium text-sdb-cyan tracking-wide">وصل</p>
-        </div>
+    <aside className="hidden lg:flex lg:w-[248px] lg:shrink-0 lg:flex-col lg:border-e lg:border-sdb-deep/[0.07] lg:bg-white lg:h-screen lg:sticky lg:top-0">
+      <div className="flex items-center px-5 pt-6 pb-5">
+        <BrandLockup size="sm" />
       </div>
 
       <nav className="flex-1 overflow-y-auto px-3 py-2">
@@ -50,7 +47,7 @@ export function Sidebar({ items, name, subtitle, avatarColor, initials }: Sideba
                 }
               >
                 <item.icon size={17} />
-                {item.label}
+                {t(item.labelKey)}
               </NavLink>
             </motion.li>
           ))}
@@ -67,10 +64,10 @@ export function Sidebar({ items, name, subtitle, avatarColor, initials }: Sideba
         </div>
         <div className="mt-1 flex flex-col gap-0.5">
           <button className="flex items-center gap-3 rounded-xl px-3.5 py-2 text-[13px] font-medium text-[#526270] hover:bg-sdb-deep/[0.05] hover:text-sdb-deep transition-colors cursor-pointer">
-            <UserRound size={16} /> Profile
+            <UserRound size={16} /> {t('common.profile')}
           </button>
           <button className="flex items-center gap-3 rounded-xl px-3.5 py-2 text-[13px] font-medium text-[#526270] hover:bg-sdb-deep/[0.05] hover:text-sdb-deep transition-colors cursor-pointer">
-            <Settings size={16} /> Settings
+            <Settings size={16} /> {t('common.settings')}
           </button>
           <button
             onClick={() => {
@@ -79,7 +76,7 @@ export function Sidebar({ items, name, subtitle, avatarColor, initials }: Sideba
             }}
             className="flex items-center gap-3 rounded-xl px-3.5 py-2 text-[13px] font-medium text-[#526270] hover:bg-sdb-orange/[0.08] hover:text-sdb-orange transition-colors cursor-pointer"
           >
-            <LogOut size={16} /> Switch experience
+            <LogOut size={16} /> {t('common.switchExperience')}
           </button>
         </div>
       </div>

@@ -4,6 +4,7 @@ import type { Insight } from '@/types'
 import { Card } from '@/components/ui/Card'
 import { Badge } from '@/components/ui/Badge'
 import { DemoDataBadge } from '@/components/ui/Misc'
+import { useT, type TranslationKey } from '@/i18n'
 
 const kindConfig = {
   Opportunity: { icon: Lightbulb, tone: 'orange' as const, color: '#F0693E' },
@@ -12,11 +13,12 @@ const kindConfig = {
 }
 
 export function InsightPanel({ insights }: { insights: Insight[] }) {
+  const { t } = useT()
   return (
     <Card className="p-6">
       <div className="flex items-center justify-between mb-4">
-        <p className="text-[13px] font-bold text-sdb-deep">AI-generated ecosystem insights</p>
-        <DemoDataBadge label="Simulated demo data" />
+        <p className="text-[13px] font-bold text-sdb-deep">{t('employee.insightsTitle')}</p>
+        <DemoDataBadge label={t('common.simulated')} />
       </div>
       <div className="grid gap-4 sm:grid-cols-3">
         {insights.map((insight, i) => {
@@ -30,10 +32,10 @@ export function InsightPanel({ insights }: { insights: Insight[] }) {
               className="rounded-xl border border-sdb-deep/[0.07] p-4"
             >
               <Badge tone={config.tone}>
-                <config.icon size={11} /> {insight.kind}
+                <config.icon size={11} /> {t(`employee.kind.${insight.kind}` as TranslationKey)}
               </Badge>
-              <p className="mt-2.5 text-[13.5px] font-bold text-sdb-deep leading-snug">{insight.title}</p>
-              <p className="mt-1.5 text-[12.5px] text-[#6b7a83] leading-relaxed">{insight.description}</p>
+              <p className="mt-2.5 text-[13.5px] font-bold text-sdb-deep leading-snug">{t(`insight.${insight.id}.title` as TranslationKey)}</p>
+              <p className="mt-1.5 text-[12.5px] text-[#6b7a83] leading-relaxed">{t(`insight.${insight.id}.desc` as TranslationKey)}</p>
             </motion.div>
           )
         })}

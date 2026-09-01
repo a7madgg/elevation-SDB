@@ -1,8 +1,11 @@
 import type { ReactNode } from 'react'
 import { Sparkles } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { useT } from '@/i18n'
 
-export function DemoDataBadge({ className, label = 'Demo environment — simulated data' }: { className?: string; label?: string }) {
+export function DemoDataBadge({ className, label }: { className?: string; label?: string }) {
+  const { t } = useT()
+  const resolved = label ?? t('common.demoEnv')
   return (
     <span
       className={cn(
@@ -11,7 +14,7 @@ export function DemoDataBadge({ className, label = 'Demo environment — simulat
       )}
     >
       <span className="h-1.5 w-1.5 rounded-full bg-sdb-orange" />
-      {label}
+      {resolved}
     </span>
   )
 }

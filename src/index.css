@@ -72,6 +72,14 @@ html[dir="rtl"] body {
   font-family: var(--font-arabic);
 }
 
+html[dir="rtl"] .lucide-arrow-right,
+html[dir="rtl"] .lucide-arrow-left,
+html[dir="rtl"] .lucide-chevron-right,
+html[dir="rtl"] .lucide-arrow-up-right,
+html[dir="rtl"] .lucide-arrow-down-right {
+  transform: scaleX(-1);
+}
+
 ::selection {
   background: rgba(18, 177, 198, 0.22);
   color: #0d4066;

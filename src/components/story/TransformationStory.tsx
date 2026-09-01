@@ -1,24 +1,26 @@
 import { motion } from 'framer-motion'
 import { Banknote, GitBranch, Heart, PiggyBank, TrendingUp } from 'lucide-react'
-
-const stages = [
-  { icon: Banknote, title: 'Financing', desc: 'SDB provides capital', color: '#0D4066' },
-  { icon: GitBranch, title: 'Connection', desc: 'AI discovers relevant relationships', color: '#12B1C6' },
-  { icon: TrendingUp, title: 'Growth', desc: 'Businesses help businesses', color: '#0074AE' },
-  { icon: PiggyBank, title: 'Savings', desc: 'Financial Copilot strengthens financial habits', color: '#34B889' },
-  { icon: Heart, title: 'Impact', desc: 'A stronger economic ecosystem', color: '#70154C' },
-]
+import { useT } from '@/i18n'
 
 export function TransformationStory() {
+  const { t } = useT()
+  const stages = [
+    { icon: Banknote, title: t('story.financing'), desc: t('story.financingDesc'), color: '#0D4066' },
+    { icon: GitBranch, title: t('story.connection'), desc: t('story.connectionDesc'), color: '#12B1C6' },
+    { icon: TrendingUp, title: t('story.growth'), desc: t('story.growthDesc'), color: '#0074AE' },
+    { icon: PiggyBank, title: t('story.savings'), desc: t('story.savingsDesc'), color: '#34B889' },
+    { icon: Heart, title: t('story.impact'), desc: t('story.impactDesc'), color: '#70154C' },
+  ]
+
   return (
     <div>
       <div className="mx-auto max-w-2xl text-center">
-        <p className="text-[12.5px] font-bold uppercase tracking-wider text-sdb-cyan">The bigger picture</p>
-        <h2 className="mt-2 text-[28px] sm:text-[34px] font-bold text-sdb-deep text-balance">From Beneficiary to Ecosystem</h2>
+        <p className="text-[12.5px] font-bold uppercase tracking-wider text-sdb-cyan">{t('story.eyebrow')}</p>
+        <h2 className="mt-2 text-[28px] sm:text-[34px] font-bold text-sdb-deep text-balance">{t('story.title')}</h2>
       </div>
 
       <div className="relative mt-14">
-        <div className="hidden lg:block absolute top-[38px] left-[8%] right-[8%] h-[2px] bg-gradient-to-r from-sdb-deep via-sdb-cyan to-sdb-burgundy opacity-25" />
+        <div className="hidden lg:block absolute top-[38px] start-[8%] end-[8%] h-[2px] bg-gradient-to-r from-sdb-deep via-sdb-cyan to-sdb-burgundy opacity-25 rtl:bg-gradient-to-l" />
         <div className="grid gap-8 lg:grid-cols-5">
           {stages.map((stage, i) => (
             <motion.div
@@ -58,8 +60,8 @@ export function TransformationStory() {
         transition={{ delay: 0.6, duration: 0.6 }}
         className="mx-auto mt-14 max-w-2xl text-center text-[15px] font-medium text-sdb-deep"
       >
-        One beneficiary can become another beneficiary's customer, supplier, or partner —
-        <span className="text-sdb-cyan"> AI is what makes these connections possible at scale.</span>
+        {t('story.closer')}
+        <span className="text-sdb-cyan">{t('story.closerAccent')}</span>
       </motion.p>
     </div>
   )

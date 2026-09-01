@@ -6,6 +6,7 @@ import { Avatar } from '@/components/ui/Avatar'
 import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
 import { ProgressBar } from '@/components/ui/ProgressBar'
+import { cityLabel, typeLabel, useT } from '@/i18n'
 
 interface MatchCardProps {
   match: MatchExplanation
@@ -16,6 +17,7 @@ interface MatchCardProps {
 export function MatchCard({ match, index = 0, onConnect }: MatchCardProps) {
   const { provider, score, reasons } = match
   const navigate = useNavigate()
+  const { t } = useT()
 
   const scoreColor = score >= 85 ? '#34B889' : score >= 65 ? '#12B1C6' : '#F0693E'
 
@@ -32,29 +34,29 @@ export function MatchCard({ match, index = 0, onConnect }: MatchCardProps) {
           <Avatar initials={provider.initials} color={provider.avatarColor} size={46} />
           <div className="min-w-0">
             <p className="truncate text-[15px] font-bold text-sdb-deep">{provider.name}</p>
-            <p className="truncate text-[12.5px] text-[#6b7a83]">{provider.type}</p>
+            <p className="truncate text-[12.5px] text-[#6b7a83]">{typeLabel(t, provider.type)}</p>
           </div>
         </div>
         <div className="flex flex-col items-end shrink-0">
           <span className="text-[19px] font-extrabold leading-none" style={{ color: scoreColor }}>
             {score}%
           </span>
-          <span className="text-[10.5px] font-medium text-[#95a2a9] mt-0.5">match</span>
+          <span className="text-[10.5px] font-medium text-[#95a2a9] mt-0.5">{t('common.match')}</span>
         </div>
       </div>
 
       <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-[12.5px] text-[#6b7a83]">
-        {provider.isSdbBeneficiary && <Badge tone="green">SDB Beneficiary</Badge>}
+        {provider.isSdbBeneficiary && <Badge tone="green">{t('common.sdbBeneficiary')}</Badge>}
         <span className="flex items-center gap-1">
           <Star size={13} className="fill-[#F0B93E] text-[#F0B93E]" /> {provider.rating.toFixed(1)}
         </span>
         <span className="flex items-center gap-1">
-          <MapPin size={13} /> {provider.city}
+          <MapPin size={13} /> {cityLabel(t, provider.city)}
         </span>
       </div>
 
       <div className="mt-3.5 rounded-xl bg-[#f6f9fa] p-3">
-        <p className="text-[11px] font-bold uppercase tracking-wide text-[#8996a0]">Why this match?</p>
+        <p className="text-[11px] font-bold uppercase tracking-wide text-[#8996a0]">{t('match.why')}</p>
         <ul className="mt-1.5 flex flex-col gap-1">
           {reasons.map((reason) => (
             <li key={reason} className="text-[12.5px] leading-snug text-[#3f4d55] flex gap-1.5">
@@ -70,10 +72,10 @@ export function MatchCard({ match, index = 0, onConnect }: MatchCardProps) {
 
       <div className="mt-4 flex items-center gap-2">
         <Button variant="outline" size="sm" className="flex-1" onClick={() => navigate(`/beneficiary/profile/${provider.id}`)}>
-          View profile
+          {t('common.viewProfile')}
         </Button>
         <Button variant="primary" size="sm" className="flex-1" onClick={() => onConnect(match)}>
-          Connect
+          {t('common.connect')}
         </Button>
       </div>
     </motion.div>

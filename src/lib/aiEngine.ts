@@ -1,5 +1,6 @@
 import { detectBudget, detectCategories, detectCity, findMatches } from '@/lib/matchingEngine'
-import type { MatchExplanation, ServiceCategory } from '@/types'
+import type { Language, MatchExplanation, ServiceCategory } from '@/types'
+import { catLower, cityLabel, translate, type TranslateFn } from '@/i18n'
 
 export type AiIntent = 'matching' | 'agentic' | 'financial' | 'general'
 
@@ -19,10 +20,30 @@ export interface AiResponse {
   isAgentic: boolean
 }
 
-const FINANCIAL_KEYWORDS = ['save', 'saving', 'savings', 'expense', 'expenses', 'budget', 'cash flow', 'spend', 'reduce cost', 'financial']
-const AGENTIC_KEYWORDS = ['find me', 'find someone', 'connect me', 'handle it', 'find a']
+const FINANCIAL_KEYWORDS = [
+  'save',
+  'saving',
+  'savings',
+  'expense',
+  'expenses',
+  'budget',
+  'cash flow',
+  'spend',
+  'reduce cost',
+  'financial',
+  'وفر',
+  'توفير',
+  'ادخار',
+  'مصروف',
+  'مصاريف',
+  'مصروفات',
+  'ميزانية',
+  'تدفق',
+]
+const AGENTIC_KEYWORDS = ['find me', 'find someone', 'connect me', 'handle it', 'find a', 'ابحث لي', 'جد لي', 'وصلني', 'ابحث عن']
 
-export function interpretQuery(rawQuery: string): AiResponse {
+export function interpretQuery(rawQuery: string, language: Language = 'en'): AiResponse {
+  const t: TranslateFn = (key, vars) => translate(language, key, vars)
   const query = rawQuery.trim()
   const q = query.toLowerCase()
   const categories = detectCategories(query)
@@ -32,77 +53,79 @@ export function interpretQuery(rawQuery: string): AiResponse {
   const isFinancial = FINANCIAL_KEYWORDS.some((k) => q.includes(k)) && categories.length === 0
   const isAgentic = AGENTIC_KEYWORDS.some((k) => q.includes(k)) && (budget !== null || categories.length > 0)
 
+  const matchingActions: AiActionCard[] = [
+    { id: 'find-provider', label: t('assistant.action.provider') },
+    { id: 'find-partner', label: t('assistant.action.partner') },
+    { id: 'create-plan', label: t('assistant.action.plan') },
+    { id: 'estimate-budget', label: t('assistant.action.budget') },
+  ]
+
   if (isFinancial) {
     return {
       intent: 'financial',
-      headline: 'Here is a quick look at your financial health.',
-      detail:
-        'Based on your recent activity, small adjustments to recurring expenses could meaningfully increase your monthly savings. Open your Financial Copilot for a full breakdown and an interactive budget optimizer.',
+      headline: t('assistant.financialHeadline'),
+      detail: t('assistant.financialDetail'),
       categories: [],
       budget,
       matches: [],
       actionCards: [
-        { id: 'open-copilot', label: 'Open Financial Copilot' },
-        { id: 'optimize-budget', label: 'Optimize my budget' },
-        { id: 'savings-plan', label: 'Build a savings plan' },
+        { id: 'open-copilot', label: t('assistant.action.copilot') },
+        { id: 'optimize-budget', label: t('assistant.action.optimize') },
+        { id: 'savings-plan', label: t('assistant.action.savings') },
       ],
       isAgentic: false,
     }
   }
 
   if (categories.length > 0 || isAgentic) {
-    const matches = findMatches({ categories, budget, city, limit: 5, query })
+    const matches = findMatches({ categories, budget, city, limit: 5, query, language })
     const headline =
       matches.length > 0
-        ? `I found ${matches.length} potential ${matches.length === 1 ? 'match' : 'matches'}.`
-        : "I couldn't find a strong match yet — try describing the service you need."
+        ? t('assistant.foundMatches', {
+            count: matches.length,
+            word: matches.length === 1 ? t('assistant.match') : t('assistant.matches'),
+          })
+        : t('assistant.noMatch')
     return {
       intent: isAgentic ? 'agentic' : 'matching',
       headline,
       detail: categories.length
-        ? `Searching the ecosystem for ${categories.join(' & ').toLowerCase()} providers${budget ? ` under SAR ${budget.toLocaleString()}` : ''}${city ? ` in ${city}` : ''}.`
+        ? t('assistant.searching', {
+            cats: categories.map((c) => catLower(t, c)).join(language === 'ar' ? ' و ' : ' & '),
+            budget: budget ? t('assistant.underBudget', { amount: budget.toLocaleString('en-US') }) : '',
+            city: city ? t('assistant.inCity', { city: cityLabel(t, city) }) : '',
+          })
         : undefined,
       categories,
       budget,
       matches,
-      actionCards: [
-        { id: 'find-provider', label: 'Find a provider' },
-        { id: 'find-partner', label: 'Find a partner' },
-        { id: 'create-plan', label: 'Create a marketing plan' },
-        { id: 'estimate-budget', label: 'Estimate a budget' },
-      ],
+      actionCards: matchingActions,
       isAgentic,
     }
   }
 
   return {
     intent: 'general',
-    headline: 'I can help with that.',
-    detail: 'Tell me what you need — a service provider, a business partner, or help managing your finances — and I will search the SDB ecosystem for you.',
+    headline: t('assistant.generalHeadline'),
+    detail: t('assistant.generalDetail'),
     categories: [],
     budget,
     matches: [],
-    actionCards: [
-      { id: 'find-provider', label: 'Find a provider' },
-      { id: 'find-partner', label: 'Find a partner' },
-      { id: 'create-plan', label: 'Create a marketing plan' },
-      { id: 'estimate-budget', label: 'Estimate a budget' },
-    ],
+    actionCards: matchingActions,
     isAgentic: false,
   }
 }
 
-export const promptSuggestions = [
-  'I need someone to manage my Instagram.',
-  'How can I reduce my business expenses?',
-  'I need packaging for my products.',
-  'Help me save SAR 1,000 this month.',
-]
+export function promptSuggestionsFor(language: Language): string[] {
+  const t: TranslateFn = (key) => translate(language, key)
+  return [t('assistant.prompt1'), t('assistant.prompt2'), t('assistant.prompt3'), t('assistant.prompt4')]
+}
 
-export const agenticStepDefinitions = [
-  'Understanding your requirements',
-  'Searching relevant beneficiaries',
-  'Comparing services',
-  'Checking budget compatibility',
-  'Ranking matches',
-]
+export const promptSuggestions = promptSuggestionsFor('en')
+
+export function agenticStepsFor(language: Language): string[] {
+  const t: TranslateFn = (key) => translate(language, key)
+  return [t('assistant.step1'), t('assistant.step2'), t('assistant.step3'), t('assistant.step4'), t('assistant.step5')]
+}
+
+export const agenticStepDefinitions = agenticStepsFor('en')
