@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
-import { ArrowRight, ArrowUp, Megaphone, Package, PiggyBank, Truck } from 'lucide-react'
+import { ArrowRight, ArrowUp, Megaphone, Package, PiggyBank, Sparkles, Truck } from 'lucide-react'
 import { currentBeneficiary, financialHealthScore, savingsGoal } from '@/data/beneficiary'
 import { promptSuggestionsFor } from '@/lib/aiEngine'
+import { getLinkById } from '@/data/ecosystemLinks'
+import { getNode } from '@/data/ecosystemGraph'
 import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
 import { ScoreRing } from '@/components/ui/ScoreRing'
@@ -12,6 +14,9 @@ import { AiGlyph } from '@/components/ui/Misc'
 import { Avatar } from '@/components/ui/Avatar'
 import { formatSAR } from '@/lib/utils'
 import { useT } from '@/i18n'
+
+const flagshipLink = getLinkById('link-sara-noor')!
+const flagshipMatch = getNode(flagshipLink.toId)!
 
 export default function Dashboard() {
   const navigate = useNavigate()
@@ -61,7 +66,37 @@ export default function Dashboard() {
         </Card>
       </motion.div>
 
-      <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, delay: 0.1 }} className="mt-5">
+      <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, delay: 0.08 }} className="mt-5">
+        <Card
+          className="cursor-pointer p-6 sm:p-7 hover:shadow-[0_20px_44px_-20px_rgba(13,64,102,0.3)] transition-shadow"
+          onClick={() => navigate('/beneficiary/matches')}
+        >
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div className="flex items-center gap-2 text-sdb-cyan">
+              <Sparkles size={15} />
+              <span className="text-[11.5px] font-bold uppercase tracking-wider">Ecosystem Match</span>
+            </div>
+            <span className="rounded-full bg-sdb-green/[0.12] px-2.5 py-1 text-[12px] font-extrabold text-sdb-green">{flagshipLink.matchScore}% match</span>
+          </div>
+          <div className="mt-3 flex items-center gap-3">
+            <div className="flex items-center -space-x-2">
+              <Avatar initials={currentBeneficiary.initials} color={currentBeneficiary.avatarColor} size={38} className="ring-2 ring-white" />
+              <Avatar initials={flagshipMatch.initials} color={flagshipMatch.avatarColor} size={38} className="ring-2 ring-white" />
+            </div>
+            <p className="text-[15px] font-bold text-sdb-deep">
+              {currentBeneficiary.businessName} × {flagshipMatch.name}
+            </p>
+          </div>
+          <p className="mt-2 text-[13.5px] text-[#6b7a83]">
+            AI found {flagshipMatch.name}, a strong match for the marketing support {currentBeneficiary.businessName} needs right now.
+          </p>
+          <span className="mt-3 inline-flex items-center gap-1.5 text-[13px] font-semibold text-sdb-cyan hover:gap-2.5 transition-all">
+            See why they match <ArrowRight size={14} />
+          </span>
+        </Card>
+      </motion.div>
+
+      <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, delay: 0.12 }} className="mt-5">
         <Card className="p-6 sm:p-7">
           <div className="flex items-center gap-2.5">
             <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-sdb-cyan/[0.12] text-sdb-cyan animate-pulse-slow">

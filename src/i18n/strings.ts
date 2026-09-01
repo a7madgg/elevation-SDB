@@ -17,7 +17,7 @@ export const en = {
   'common.match': 'match',
   'common.reviews': 'reviews',
   'common.demoData': 'Demo data',
-  'common.demoEnv': 'Demo environment — simulated data',
+  'common.demoEnv': 'Demo environment. Simulated data',
   'common.simulated': 'Simulated demo data',
   'common.sdbBeneficiary': 'SDB Beneficiary',
   'common.viewProfile': 'View profile',
@@ -46,9 +46,11 @@ export const en = {
   'nav.matches': 'AI Matches',
   'nav.beneficiaries': 'Beneficiaries',
   'nav.insights': 'Insights',
+  'nav.ecoMatches': 'Matches',
+  'nav.resilience': 'Resilience',
 
   'landing.signIn': 'Sign in',
-  'landing.badge': 'AI & Emerging Technologies — ImpactX Hackathon',
+  'landing.badge': 'AI and Emerging Technologies, ImpactX Hackathon',
   'landing.tagline': 'Turning financing into opportunity.',
   'landing.body':
     'An intelligent ecosystem connecting SDB beneficiaries with the people, businesses, services and opportunities that can help them grow.',
@@ -62,22 +64,22 @@ export const en = {
   'landing.howEyebrow': 'How it works',
   'landing.howTitle': "SDB doesn't just finance people. It finances an ecosystem.",
   'landing.howBody':
-    'Connect. Grow. Sustain. — three AI-powered pillars that turn isolated financing recipients into a working economic network.',
+    'Connect. Grow. Sustain. Three AI-powered pillars that turn isolated financing recipients into a working economic network.',
   'landing.pillar.connect': 'Connect',
   'landing.pillar.connectDesc':
     'AI intelligently matches beneficiaries with relevant businesses, freelancers, suppliers, partners and opportunities inside the SDB ecosystem.',
   'landing.pillar.grow': 'Grow',
   'landing.pillar.growDesc':
-    'AI identifies unmet needs and potential economic connections between beneficiaries — before they even know to look for them.',
+    'AI identifies unmet needs and potential economic connections between beneficiaries, before they even know to look for them.',
   'landing.pillar.sustain': 'Sustain',
   'landing.pillar.sustainDesc':
     'An AI Financial Copilot helps beneficiaries manage expenses, understand cash flow, set savings goals and build healthier financial habits.',
   'landing.seeTitle': 'See it for yourself',
   'landing.seeBody': 'A live, interactive walkthrough of the beneficiary and SDB employee experience.',
-  'landing.footer': 'SDB Connect · وصل — A concept prototype for the ImpactX Hackathon. Demo data only.',
+  'landing.footer': 'SDB Connect · وصل. A concept prototype for the ImpactX Hackathon. Demo data only.',
 
   'login.title': 'Welcome to SDB Connect',
-  'login.body': 'This is a hackathon prototype — choose an experience to explore with demo data. No sign-in required.',
+  'login.body': 'This is a hackathon prototype. Choose an experience to explore with demo data. No sign-in required.',
   'login.beneficiary': 'Continue as Beneficiary',
   'login.beneficiaryDemo': 'Demo profile: {name} · {business}',
   'login.employee': 'Continue as SDB Employee',
@@ -109,7 +111,7 @@ export const en = {
   'assistant.eyebrow': 'AI Assistant',
   'assistant.title': 'How can I help you grow?',
   'assistant.desc':
-    'Ask for a service provider, a business partner, a marketing plan, or help managing your money — in your own words.',
+    'Ask for a service provider, a business partner, a marketing plan, or help managing your money, in your own words.',
   'assistant.emptyTitle': 'Ask me anything about growing your business',
   'assistant.emptyBody': "I can find providers, explain why they're a fit, connect you directly, or help manage your finances.",
   'assistant.placeholder': 'What do you need help with?',
@@ -138,13 +140,13 @@ export const en = {
   'assistant.foundMatches': 'I found {count} potential {word}.',
   'assistant.match': 'match',
   'assistant.matches': 'matches',
-  'assistant.noMatch': "I couldn't find a strong match yet — try describing the service you need.",
+  'assistant.noMatch': "I couldn't find a strong match yet. Try describing the service you need.",
   'assistant.searching': 'Searching the ecosystem for {cats} providers{budget}{city}.',
   'assistant.underBudget': ' under SAR {amount}',
   'assistant.inCity': ' in {city}',
   'assistant.generalHeadline': 'I can help with that.',
   'assistant.generalDetail':
-    'Tell me what you need — a service provider, a business partner, or help managing your finances — and I will search the SDB ecosystem for you.',
+    'Tell me what you need: a service provider, a business partner, or help managing your finances. I will search the SDB ecosystem for you.',
   'assistant.findMore': 'Find more {cat} providers',
   'assistant.findProviderFallback': 'Find a provider for my business',
   'assistant.estimateBudgetQuery': 'Estimate a budget for this service',
@@ -152,7 +154,7 @@ export const en = {
 
   'discover.eyebrow': 'Ecosystem',
   'discover.title': 'Discover the SDB Ecosystem',
-  'discover.desc': 'Browse the businesses, freelancers and startups financed by SDB — and find the ones that can help you grow.',
+  'discover.desc': 'Browse the businesses, freelancers and startups financed by SDB, and find the ones that can help you grow.',
   'discover.search': 'Search businesses, freelancers, services…',
   'discover.allServices': 'All services',
   'discover.allCities': 'All cities',
@@ -179,13 +181,13 @@ export const en = {
   'copilot.title': 'Your Financial Copilot',
   'copilot.desc': 'Small decisions today can create financial stability tomorrow.',
   'copilot.health': 'Financial Health',
-  'copilot.standing': 'Good standing — steady cash flow with room to optimize expenses.',
+  'copilot.standing': 'Good standing. Steady cash flow with room to optimize expenses.',
   'copilot.breakdown': 'Score breakdown',
   'copilot.cashFlow': 'Cash Flow',
   'copilot.expenseMgmt': 'Expense Management',
   'copilot.savings': 'Savings',
   'copilot.commitments': 'Commitments',
-  'copilot.cashLast6': 'Cash flow — last 6 months',
+  'copilot.cashLast6': 'Cash flow, last 6 months',
   'copilot.income': 'Income',
   'copilot.expenses': 'Expenses',
   'copilot.aiInsight': 'AI Financial Insight',
@@ -194,7 +196,7 @@ export const en = {
   'copilot.recommendation': 'AI recommendation',
   'copilot.recBody':
     'Reducing approximately SAR 300 in recurring expenses could allow you to increase your monthly savings from {from} to {to}.',
-  'copilot.notAdvice': 'AI-generated estimate — not financial advice.',
+  'copilot.notAdvice': 'AI-generated estimate. Not financial advice.',
   'copilot.exploreOptimizer': 'Explore the budget optimizer below to see it happen live.',
   'copilot.optimize': 'Optimize my budget',
 
@@ -203,7 +205,7 @@ export const en = {
   'budget.potential': 'Potential monthly savings',
   'budget.timeToGoal': 'Time to goal',
   'budget.disclaimer':
-    'This is an AI-generated estimate for illustration, based on {amount}/month available — not financial advice.',
+    'This is an AI-generated estimate for illustration, based on {amount}/month available. Not financial advice.',
   'expense.food': 'Ingredients & Supplies',
   'expense.marketing': 'Marketing',
   'expense.transport': 'Transportation',
@@ -249,7 +251,7 @@ export const en = {
   'profile.lookingFor': 'Looking for',
   'profile.matchExplain': 'AI Match Explanation',
   'profile.matchBody':
-    'Strong match for {audience} in food, retail and lifestyle categories — {name} regularly works with beneficiaries in similar categories to yours and matches your budget range of SAR {min}–{max}.',
+    'Strong match for {audience} in food, retail and lifestyle categories. {name} regularly works with beneficiaries in similar categories to yours and matches your budget range of SAR {min} to {max}.',
   'profile.audienceBusinesses': 'businesses',
   'profile.audienceFamilies': 'productive families and small businesses',
 
@@ -266,7 +268,7 @@ export const en = {
   'story.impact': 'Impact',
   'story.impactDesc': 'A stronger economic ecosystem',
   'story.closer':
-    "One beneficiary can become another beneficiary's customer, supplier, or partner —",
+    "One beneficiary can become another beneficiary's customer, supplier, or partner.",
   'story.closerAccent': ' AI is what makes these connections possible at scale.',
 
   'employee.overviewEyebrow': 'Ecosystem Intelligence',
@@ -288,11 +290,19 @@ export const en = {
   'employee.link.matchesDesc': 'AI-detected beneficiary matches',
   'employee.link.map': 'Ecosystem Map',
   'employee.link.mapDesc': 'Explore categories & geography',
+  'employee.link.resilience': 'Business Resilience',
+  'employee.link.resilienceDesc': '{count} businesses flagged by AI early-warning',
+  'employee.potentialTitle': 'Ecosystem Potential',
+  'employee.potentialDesc': 'What AI estimates is possible if every unmet need in the ecosystem were matched.',
+  'employee.potential.connections': 'Potential connections',
+  'employee.potential.needs': 'Unmet needs',
+  'employee.potential.collabs': 'Potential collaborations',
+  'employee.potential.support': 'Businesses needing support',
   'employee.insightsTitle': 'AI-generated ecosystem insights',
   'employee.mapEyebrow': 'Ecosystem',
   'employee.mapTitle': 'Ecosystem Map',
   'employee.mapDesc':
-    'An interactive view of how beneficiary categories relate — click a category to see needs, providers and geography.',
+    'An interactive view of how beneficiary categories relate. Click a category to see needs, providers and geography.',
   'employee.mapHint': 'Click a category to explore ecosystem detail',
   'employee.topNeeds': 'Top needs',
   'employee.availableProviders': 'Available providers',
@@ -300,7 +310,7 @@ export const en = {
   'employee.oppEyebrow': 'Opportunities',
   'employee.oppTitle': 'AI Opportunity Engine',
   'employee.oppDesc':
-    'Where beneficiary demand outpaces available ecosystem supply — ranked by AI for SDB program teams to act on.',
+    'Where beneficiary demand outpaces available ecosystem supply, ranked by AI for SDB program teams to act on.',
   'employee.demandVsSupply': 'Demand vs. supply by category',
   'employee.demandVsSupplySub': 'Simulated demo data · index score out of 100',
   'employee.highUnmet': 'High unmet demand',
@@ -318,9 +328,9 @@ export const en = {
   'employee.provides': 'Provides: {cat}',
   'employee.benEyebrow': 'Beneficiaries',
   'employee.benTitle': 'Active Businesses',
-  'employee.benDesc': 'A privacy-aware view of businesses in the ecosystem — no personal financial data is shown here.',
+  'employee.benDesc': 'A privacy-aware view of businesses in the ecosystem. No personal financial data is shown here.',
   'employee.privacy':
-    'This view only shows business names, categories and public profile information beneficiaries have opted to share. Individual financial data is never shown to employees — analytics elsewhere in this dashboard are aggregated and anonymized by design.',
+    'This view only shows business names, categories and public profile information beneficiaries have opted to share. Individual financial data is never shown to employees. Analytics elsewhere in this dashboard are aggregated and anonymized by design.',
   'employee.insEyebrow': 'Insights',
   'employee.insTitle': 'Ecosystem Insights',
   'employee.insDesc': 'AI-generated, aggregated observations across the beneficiary ecosystem.',
@@ -336,7 +346,7 @@ export const en = {
   'match.budgetFit': 'Fits your requested budget of {amount} SAR',
   'match.basedIn': 'Based in {city}, close to you',
   'match.highlyRated': 'Highly rated at {rating}★ across {count} reviews',
-  'match.fellow': 'Fellow SDB-financed beneficiary — keeping value inside the ecosystem',
+  'match.fellow': 'Fellow SDB-financed beneficiary, keeping value inside the ecosystem',
 
   'connect.title': 'Connect with {name}?',
   'connect.aiMessage': 'AI-generated message',
@@ -459,7 +469,7 @@ export const en = {
 
   'p.prov-noor.headline': 'Social media & content studio for food and lifestyle brands',
   'p.prov-noor.bio':
-    'Noor Creative is a small SDB-financed marketing startup specializing in growing food, beverage and lifestyle brands across social media — from Riyadh to the rest of the Kingdom.',
+    'Noor Creative is a small SDB-financed marketing startup specializing in growing food, beverage and lifestyle brands across social media, from Riyadh to the rest of the Kingdom.',
   'p.prov-noor.rt': 'Usually replies within 2 hours',
   'p.prov-pixel.headline': 'Freelance brand designer & content creator',
   'p.prov-pixel.bio':
@@ -576,7 +586,7 @@ export const ar: Record<TranslationKey, string> = {
   'common.match': 'تطابق',
   'common.reviews': 'تقييم',
   'common.demoData': 'بيانات تجريبية',
-  'common.demoEnv': 'بيئة تجريبية — بيانات محاكاة',
+  'common.demoEnv': 'بيئة تجريبية. بيانات محاكاة',
   'common.simulated': 'بيانات تجريبية محاكاة',
   'common.sdbBeneficiary': 'مستفيد بنك التنمية',
   'common.viewProfile': 'عرض الملف',
@@ -605,9 +615,11 @@ export const ar: Record<TranslationKey, string> = {
   'nav.matches': 'التوافق الذكي',
   'nav.beneficiaries': 'المستفيدون',
   'nav.insights': 'الرؤى',
+  'nav.ecoMatches': 'التطابقات',
+  'nav.resilience': 'المرونة',
 
   'landing.signIn': 'تسجيل الدخول',
-  'landing.badge': 'الذكاء الاصطناعي والتقنيات الناشئة — هاكاثون ImpactX',
+  'landing.badge': 'الذكاء الاصطناعي والتقنيات الناشئة، هاكاثون ImpactX',
   'landing.tagline': 'نحوّل التمويل إلى فرصة.',
   'landing.body':
     'منظومة ذكية تربط مستفيدي بنك التنمية الاجتماعية بالأشخاص والأعمال والخدمات والفرص التي تساعدهم على النمو.',
@@ -621,22 +633,22 @@ export const ar: Record<TranslationKey, string> = {
   'landing.howEyebrow': 'كيف يعمل',
   'landing.howTitle': 'بنك التنمية لا يموّل الأفراد فقط. يموّل منظومة كاملة.',
   'landing.howBody':
-    'اربط. انمُ. استدِم. — ثلاثة محاور مدعومة بالذكاء الاصطناعي تحوّل المستفيدين المنفردين إلى شبكة اقتصادية عاملة.',
+    'اربط. انمُ. استدِم. ثلاثة محاور مدعومة بالذكاء الاصطناعي تحوّل المستفيدين المنفردين إلى شبكة اقتصادية عاملة.',
   'landing.pillar.connect': 'اربط',
   'landing.pillar.connectDesc':
     'يطابق الذكاء الاصطناعي المستفيدين بذكاء مع الأعمال والمستقلين والموردين والشركاء والفرص داخل منظومة بنك التنمية.',
   'landing.pillar.grow': 'انمُ',
   'landing.pillar.growDesc':
-    'يكتشف الذكاء الاصطناعي الاحتياجات غير الملباة والروابط الاقتصادية المحتملة بين المستفيدين — قبل أن يبحثوا عنها.',
+    'يكتشف الذكاء الاصطناعي الاحتياجات غير الملباة والروابط الاقتصادية المحتملة بين المستفيدين، قبل أن يبحثوا عنها.',
   'landing.pillar.sustain': 'استدِم',
   'landing.pillar.sustainDesc':
     'يساعد المساعد المالي الذكي المستفيدين على إدارة المصروفات وفهم التدفق النقدي ووضع أهداف ادخار وبناء عادات مالية أصح.',
   'landing.seeTitle': 'جرّبه بنفسك',
   'landing.seeBody': 'جولة تفاعلية مباشرة لتجربة المستفيد وموظف بنك التنمية الاجتماعية.',
-  'landing.footer': 'SDB Connect · وصل — نموذج مفهوم لهاكاثون ImpactX. بيانات تجريبية فقط.',
+  'landing.footer': 'SDB Connect · وصل. نموذج مفهوم لهاكاثون ImpactX. بيانات تجريبية فقط.',
 
   'login.title': 'مرحبًا بك في SDB Connect',
-  'login.body': 'هذا نموذج أولي للهاكاثون — اختر تجربة للاستكشاف ببيانات تجريبية. لا يلزم تسجيل دخول.',
+  'login.body': 'هذا نموذج أولي للهاكاثون. اختر تجربة للاستكشاف ببيانات تجريبية. لا يلزم تسجيل دخول.',
   'login.beneficiary': 'متابعة كمستفيد',
   'login.beneficiaryDemo': 'ملف تجريبي: {name} · {business}',
   'login.employee': 'متابعة كموظف بنك التنمية',
@@ -667,7 +679,7 @@ export const ar: Record<TranslationKey, string> = {
 
   'assistant.eyebrow': 'المساعد الذكي',
   'assistant.title': 'كيف أساعدك على النمو؟',
-  'assistant.desc': 'اطلب مزوّد خدمة أو شريك أعمال أو خطة تسويق أو مساعدة في إدارة مالك — بعباراتك أنت.',
+  'assistant.desc': 'اطلب مزوّد خدمة أو شريك أعمال أو خطة تسويق أو مساعدة في إدارة مالك، بعباراتك أنت.',
   'assistant.emptyTitle': 'اسألني أي شيء عن تنمية مشروعك',
   'assistant.emptyBody': 'أستطيع إيجاد مزوّدين وشرح سبب ملاءمتهم وربطك بهم مباشرة أو مساعدتك في إدارة مالك.',
   'assistant.placeholder': 'بماذا تحتاج المساعدة؟',
@@ -696,13 +708,13 @@ export const ar: Record<TranslationKey, string> = {
   'assistant.foundMatches': 'وجدت {count} {word} محتمل.',
   'assistant.match': 'تطابق',
   'assistant.matches': 'تطابقات',
-  'assistant.noMatch': 'لم أجد تطابقًا قويًا بعد — جرّب وصف الخدمة التي تحتاجها.',
+  'assistant.noMatch': 'لم أجد تطابقًا قويًا بعد. جرّب وصف الخدمة التي تحتاجها.',
   'assistant.searching': 'أبحث في المنظومة عن مزوّدي {cats}{budget}{city}.',
   'assistant.underBudget': ' بأقل من {amount} ر.س',
   'assistant.inCity': ' في {city}',
   'assistant.generalHeadline': 'يمكنني المساعدة في ذلك.',
   'assistant.generalDetail':
-    'أخبرني بما تحتاج — مزوّد خدمة أو شريك أعمال أو مساعدة في إدارة مالك — وسأبحث في منظومة بنك التنمية من أجلك.',
+    'أخبرني بما تحتاج: مزوّد خدمة أو شريك أعمال أو مساعدة في إدارة مالك. سأبحث في منظومة بنك التنمية من أجلك.',
   'assistant.findMore': 'إيجاد المزيد من مزوّدي {cat}',
   'assistant.findProviderFallback': 'إيجاد مزوّد لمشروعي',
   'assistant.estimateBudgetQuery': 'قدّر ميزانية لهذه الخدمة',
@@ -710,7 +722,7 @@ export const ar: Record<TranslationKey, string> = {
 
   'discover.eyebrow': 'المنظومة',
   'discover.title': 'اكتشف منظومة بنك التنمية',
-  'discover.desc': 'تصفّح الأعمال والمستقلين والشركات الناشئة المموّلة من البنك — وابحث عمّن يساعدونك على النمو.',
+  'discover.desc': 'تصفّح الأعمال والمستقلين والشركات الناشئة المموّلة من البنك، وابحث عمّن يساعدونك على النمو.',
   'discover.search': 'ابحث عن أعمال ومستقلين وخدمات…',
   'discover.allServices': 'كل الخدمات',
   'discover.allCities': 'كل المدن',
@@ -737,13 +749,13 @@ export const ar: Record<TranslationKey, string> = {
   'copilot.title': 'مساعدك المالي',
   'copilot.desc': 'قرارات صغيرة اليوم تصنع استقرارًا ماليًا غدًا.',
   'copilot.health': 'الصحة المالية',
-  'copilot.standing': 'وضع جيد — تدفق نقدي مستقر مع مجال لتحسين المصروفات.',
+  'copilot.standing': 'وضع جيد. تدفق نقدي مستقر مع مجال لتحسين المصروفات.',
   'copilot.breakdown': 'تفصيل الدرجة',
   'copilot.cashFlow': 'التدفق النقدي',
   'copilot.expenseMgmt': 'إدارة المصروفات',
   'copilot.savings': 'الادخار',
   'copilot.commitments': 'الالتزامات',
-  'copilot.cashLast6': 'التدفق النقدي — آخر 6 أشهر',
+  'copilot.cashLast6': 'التدفق النقدي، آخر 6 أشهر',
   'copilot.income': 'الدخل',
   'copilot.expenses': 'المصروفات',
   'copilot.aiInsight': 'رؤية مالية ذكية',
@@ -752,7 +764,7 @@ export const ar: Record<TranslationKey, string> = {
   'copilot.recommendation': 'توصية الذكاء الاصطناعي',
   'copilot.recBody':
     'تخفيض حوالي 300 ر.س من المصروفات المتكررة يمكن أن يرفع ادخارك الشهري من {from} إلى {to}.',
-  'copilot.notAdvice': 'تقدير مولَّد بالذكاء الاصطناعي — وليس استشارة مالية.',
+  'copilot.notAdvice': 'تقدير مولَّد بالذكاء الاصطناعي. وليس استشارة مالية.',
   'copilot.exploreOptimizer': 'استكشف محسّن الميزانية أدناه لترى التغيير مباشرة.',
   'copilot.optimize': 'حسّن ميزانيتي',
 
@@ -760,7 +772,7 @@ export const ar: Record<TranslationKey, string> = {
   'budget.desc': 'حرّك أي فئة لترى ادخارك والجدول الزمني للهدف يتحدّثان فورًا.',
   'budget.potential': 'ادخار شهري محتمل',
   'budget.timeToGoal': 'الوقت حتى الهدف',
-  'budget.disclaimer': 'هذا تقدير مولَّد بالذكاء الاصطناعي للإيضاح، بناءً على {amount}/شهر متاح — وليس استشارة مالية.',
+  'budget.disclaimer': 'هذا تقدير مولَّد بالذكاء الاصطناعي للإيضاح، بناءً على {amount}/شهر متاح. وليس استشارة مالية.',
   'expense.food': 'المكونات والمستلزمات',
   'expense.marketing': 'التسويق',
   'expense.transport': 'النقل',
@@ -806,7 +818,7 @@ export const ar: Record<TranslationKey, string> = {
   'profile.lookingFor': 'يبحث عن',
   'profile.matchExplain': 'تفسير التطابق الذكي',
   'profile.matchBody':
-    'تطابق قوي لـ {audience} في فئات الغذاء والتجزئة ونمط الحياة — يعمل {name} بانتظام مع مستفيدين في فئات مشابهة لفئتك ويتوافق مع نطاق ميزانيتك {min}–{max} ر.س.',
+    'تطابق قوي لـ {audience} في فئات الغذاء والتجزئة ونمط الحياة. يعمل {name} بانتظام مع مستفيدين في فئات مشابهة لفئتك ويتوافق مع نطاق ميزانيتك من {min} إلى {max} ر.س.',
   'profile.audienceBusinesses': 'الأعمال',
   'profile.audienceFamilies': 'الأسر المنتجة والمنشآت الصغيرة',
 
@@ -822,7 +834,7 @@ export const ar: Record<TranslationKey, string> = {
   'story.savingsDesc': 'المساعد المالي يعزّز العادات المالية',
   'story.impact': 'الأثر',
   'story.impactDesc': 'منظومة اقتصادية أقوى',
-  'story.closer': 'يمكن لمستفيد أن يصبح عميلاً أو مورّدًا أو شريكًا لمستفيد آخر —',
+  'story.closer': 'يمكن لمستفيد أن يصبح عميلاً أو مورّدًا أو شريكًا لمستفيد آخر.',
   'story.closerAccent': ' والذكاء الاصطناعي هو ما يجعل هذه الروابط ممكنة على نطاق واسع.',
 
   'employee.overviewEyebrow': 'ذكاء المنظومة',
@@ -844,10 +856,18 @@ export const ar: Record<TranslationKey, string> = {
   'employee.link.matchesDesc': 'تطابقات مستفيدين اكتشفها الذكاء الاصطناعي',
   'employee.link.map': 'خريطة المنظومة',
   'employee.link.mapDesc': 'استكشف الفئات والجغرافيا',
+  'employee.link.resilience': 'مرونة الأعمال',
+  'employee.link.resilienceDesc': '{count} أعمال أشار إليها نظام الإنذار المبكر',
+  'employee.potentialTitle': 'إمكانات المنظومة',
+  'employee.potentialDesc': 'ما يقدّره الذكاء الاصطناعي إذا تمت مطابقة كل احتياج غير ملبى في المنظومة.',
+  'employee.potential.connections': 'روابط محتملة',
+  'employee.potential.needs': 'احتياجات غير ملباة',
+  'employee.potential.collabs': 'تعاونات محتملة',
+  'employee.potential.support': 'أعمال تحتاج دعمًا',
   'employee.insightsTitle': 'رؤى منظومة مولَّدة بالذكاء الاصطناعي',
   'employee.mapEyebrow': 'المنظومة',
   'employee.mapTitle': 'خريطة المنظومة',
-  'employee.mapDesc': 'عرض تفاعلي لعلاقات فئات المستفيدين — انقر فئة لرؤية الاحتياجات والمزوّدين والجغرافيا.',
+  'employee.mapDesc': 'عرض تفاعلي لعلاقات فئات المستفيدين. انقر فئة لرؤية الاحتياجات والمزوّدين والجغرافيا.',
   'employee.mapHint': 'انقر فئة لاستكشاف تفاصيل المنظومة',
   'employee.topNeeds': 'أبرز الاحتياجات',
   'employee.availableProviders': 'المزوّدون المتاحون',
@@ -855,7 +875,7 @@ export const ar: Record<TranslationKey, string> = {
   'employee.oppEyebrow': 'الفرص',
   'employee.oppTitle': 'محرك الفرص الذكي',
   'employee.oppDesc':
-    'حيث يتجاوز طلب المستفيدين العرض المتاح في المنظومة — مرتّب بالذكاء الاصطناعي لفرق برامج البنك.',
+    'حيث يتجاوز طلب المستفيدين العرض المتاح في المنظومة، مرتّب بالذكاء الاصطناعي لفرق برامج البنك.',
   'employee.demandVsSupply': 'الطلب مقابل العرض حسب الفئة',
   'employee.demandVsSupplySub': 'بيانات تجريبية محاكاة · مؤشر من 100',
   'employee.highUnmet': 'طلب مرتفع غير ملبّى',
@@ -873,9 +893,9 @@ export const ar: Record<TranslationKey, string> = {
   'employee.provides': 'يقدّم: {cat}',
   'employee.benEyebrow': 'المستفيدون',
   'employee.benTitle': 'الأعمال النشطة',
-  'employee.benDesc': 'عرض يراعي الخصوصية لأعمال المنظومة — لا تُعرض بيانات مالية شخصية هنا.',
+  'employee.benDesc': 'عرض يراعي الخصوصية لأعمال المنظومة. لا تُعرض بيانات مالية شخصية هنا.',
   'employee.privacy':
-    'يعرض هذا العرض أسماء الأعمال والفئات ومعلومات الملف العام التي اختار المستفيدون مشاركتها فقط. لا تُعرض بيانات مالية فردية للموظفين — التحليلات في بقية اللوحة مجمّعة ومجهّلة بالتصميم.',
+    'يعرض هذا العرض أسماء الأعمال والفئات ومعلومات الملف العام التي اختار المستفيدون مشاركتها فقط. لا تُعرض بيانات مالية فردية للموظفين. التحليلات في بقية اللوحة مجمّعة ومجهّلة بالتصميم.',
   'employee.insEyebrow': 'الرؤى',
   'employee.insTitle': 'رؤى المنظومة',
   'employee.insDesc': 'ملاحظات مجمّعة مولَّدة بالذكاء الاصطناعي عبر منظومة المستفيدين.',
@@ -891,7 +911,7 @@ export const ar: Record<TranslationKey, string> = {
   'match.budgetFit': 'يناسب ميزانيتك المطلوبة البالغة {amount} ر.س',
   'match.basedIn': 'مقره في {city}، قريب منك',
   'match.highlyRated': 'تقييم مرتفع {rating}★ عبر {count} تقييم',
-  'match.fellow': 'مستفيد مموَّل من البنك مثلك — القيمة تبقى داخل المنظومة',
+  'match.fellow': 'مستفيد مموَّل من البنك مثلك، والقيمة تبقى داخل المنظومة',
 
   'connect.title': 'التواصل مع {name}؟',
   'connect.aiMessage': 'رسالة مولَّدة بالذكاء الاصطناعي',
@@ -1013,7 +1033,7 @@ export const ar: Record<TranslationKey, string> = {
 
   'p.prov-noor.headline': 'استوديو محتوى وتواصل اجتماعي للعلامات الغذائية ونمط الحياة',
   'p.prov-noor.bio':
-    'نور كرييتف شركة تسويق ناشئة مموَّلة من البنك تتخصص في تنمية علامات الغذاء والمشروبات ونمط الحياة عبر وسائل التواصل — من الرياض إلى بقية المملكة.',
+    'نور كرييتف شركة تسويق ناشئة مموَّلة من البنك تتخصص في تنمية علامات الغذاء والمشروبات ونمط الحياة عبر وسائل التواصل، من الرياض إلى بقية المملكة.',
   'p.prov-noor.rt': 'يرد عادة خلال ساعتين',
   'p.prov-pixel.headline': 'مصمم هوية بصرية وصانع محتوى مستقل',
   'p.prov-pixel.bio':

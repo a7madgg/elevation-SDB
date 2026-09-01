@@ -1,7 +1,8 @@
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
-import { ArrowRight, Building2, GitMerge, Heart, Users } from 'lucide-react'
-import { ecosystemOverview, ecosystemCategories, ecosystemInsights } from '@/data/ecosystem'
+import { ArrowRight, Building2, GitMerge, Handshake, Heart, ShieldAlert, Sparkles, Users } from 'lucide-react'
+import { ecosystemOverview, ecosystemCategories, ecosystemInsights, ecosystemPotential } from '@/data/ecosystem'
+import { earlyWarningCount } from '@/data/resilience'
 import { SectionHeader, DemoDataBadge } from '@/components/ui/Misc'
 import { StatTile } from '@/components/ui/StatTile'
 import { Card } from '@/components/ui/Card'
@@ -73,7 +74,26 @@ export default function Overview() {
         <InsightPanel insights={ecosystemInsights} />
       </div>
 
-      <div className="mt-5 grid gap-4 sm:grid-cols-3">
+      <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} className="mt-5">
+        <Card className="p-6">
+          <div className="flex items-center justify-between">
+            <p className="flex items-center gap-1.5 text-[13px] font-bold text-sdb-deep">
+              <Sparkles size={14} className="text-sdb-cyan" /> {t('employee.potentialTitle')}
+            </p>
+            <DemoDataBadge label={t('common.simulated')} />
+          </div>
+          <p className="mt-1 text-[12.5px] text-[#6b7a83]">{t('employee.potentialDesc')}</p>
+          <div className="mt-4 grid grid-cols-2 gap-4 lg:grid-cols-4">
+            <StatTile label={t('employee.potential.connections')} value={ecosystemPotential.potentialConnections} format={formatCompact} icon={<GitMerge size={16} />} accent="#12B1C6" delay={0} />
+            <StatTile label={t('employee.potential.needs')} value={ecosystemPotential.unmetNeeds} format={formatCompact} icon={<Heart size={16} />} accent="#F0693E" delay={0.05} />
+            <StatTile label={t('employee.potential.collabs')} value={ecosystemPotential.potentialCollaborations} format={formatCompact} icon={<Handshake size={16} />} accent="#34B889" delay={0.1} />
+            <StatTile label={t('employee.potential.support')} value={ecosystemPotential.businessesNeedingSupport} format={formatCompact} icon={<ShieldAlert size={16} />} accent="#70154C" delay={0.15} />
+          </div>
+        </Card>
+      </motion.div>
+
+      <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <QuickLink title={t('employee.link.resilience')} desc={t('employee.link.resilienceDesc', { count: formatCompact(earlyWarningCount) })} onClick={() => navigate('/employee/resilience')} color="#F0693E" explore={t('common.explore')} />
         <QuickLink title={t('employee.link.engine')} desc={t('employee.link.engineDesc')} onClick={() => navigate('/employee/opportunities')} color="#F0693E" explore={t('common.explore')} />
         <QuickLink title={t('employee.link.matches')} desc={t('employee.link.matchesDesc')} onClick={() => navigate('/employee/matches')} color="#12B1C6" explore={t('common.explore')} />
         <QuickLink title={t('employee.link.map')} desc={t('employee.link.mapDesc')} onClick={() => navigate('/employee/ecosystem')} color="#0D4066" explore={t('common.explore')} />

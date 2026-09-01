@@ -86,8 +86,8 @@ export function AgenticFlow({ matches, onAskToConnect }: AgenticFlowProps) {
               <p className="text-[14.5px] font-bold text-sdb-deep">{top.provider.name}</p>
               <p className="text-[12.5px] text-[#6b7a83]">
                 {language === 'ar'
-                  ? `${top.provider.priceMin.toLocaleString('en-US')}–${top.provider.priceMax.toLocaleString('en-US')} ر.س${t('common.perMonth')}`
-                  : `SAR ${top.provider.priceMin.toLocaleString('en-US')}–${top.provider.priceMax.toLocaleString('en-US')}${t('common.perMonth')}`}
+                  ? `${top.provider.priceMin.toLocaleString('en-US')} إلى ${top.provider.priceMax.toLocaleString('en-US')} ر.س${t('common.perMonth')}`
+                  : `SAR ${top.provider.priceMin.toLocaleString('en-US')} to ${top.provider.priceMax.toLocaleString('en-US')}${t('common.perMonth')}`}
               </p>
             </div>
             <Badge tone="green">{top.score}% {t('common.match')}</Badge>

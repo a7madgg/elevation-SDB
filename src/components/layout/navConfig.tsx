@@ -11,6 +11,7 @@ import {
   GitMerge,
   Users2,
   BarChart3,
+  ShieldAlert,
   type LucideIcon,
 } from 'lucide-react'
 import { AiGlyph } from '@/components/ui/Misc'
@@ -24,6 +25,7 @@ export interface NavItem {
 
 export const beneficiaryNav: NavItem[] = [
   { to: '/beneficiary', labelKey: 'nav.home', icon: Home },
+  { to: '/beneficiary/matches', labelKey: 'nav.ecoMatches', icon: GitMerge },
   { to: '/beneficiary/assistant', labelKey: 'nav.assistant', icon: AiGlyph },
   { to: '/beneficiary/discover', labelKey: 'nav.discover', icon: Compass },
   { to: '/beneficiary/network', labelKey: 'nav.network', icon: Users },
@@ -34,6 +36,7 @@ export const beneficiaryNav: NavItem[] = [
 
 export const employeeNav: NavItem[] = [
   { to: '/employee', labelKey: 'nav.overview', icon: LayoutGrid },
+  { to: '/employee/resilience', labelKey: 'nav.resilience', icon: ShieldAlert },
   { to: '/employee/ecosystem', labelKey: 'nav.ecosystem', icon: Network },
   { to: '/employee/opportunities', labelKey: 'nav.opportunities', icon: Lightbulb },
   { to: '/employee/matches', labelKey: 'nav.matches', icon: GitMerge },

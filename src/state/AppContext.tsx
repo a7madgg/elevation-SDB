@@ -117,7 +117,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     document.documentElement.lang = language
     document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr'
-    document.title = language === 'ar' ? 'SDB Connect — اربط. انمُ. استدِم.' : 'SDB Connect — Connect. Grow. Sustain.'
+    document.title = language === 'ar' ? 'SDB Connect. اربط. انمُ. استدِم.' : 'SDB Connect. Connect. Grow. Sustain.'
   }, [language])
 
   const pushToast = useCallback((toast: Omit<ToastItem, 'id'>) => {

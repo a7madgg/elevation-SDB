@@ -1,12 +1,19 @@
 import { useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
-import { Info, Sparkles, Utensils, Megaphone, Truck, Settings, Repeat, MoreHorizontal } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
+import { ArrowRight, Info, Sparkles, Utensils, Megaphone, Truck, Settings, Repeat, MoreHorizontal } from 'lucide-react'
 import { defaultExpenseCategories, savingsGoal } from '@/data/beneficiary'
 import { monthlySavings, monthsToGoal, MONTHLY_AVAILABLE } from '@/lib/financialEngine'
+import { getLinkById } from '@/data/ecosystemLinks'
+import { getNode } from '@/data/ecosystemGraph'
 import { AnimatedNumber } from '@/components/ui/AnimatedNumber'
+import { Avatar } from '@/components/ui/Avatar'
 import { formatSAR } from '@/lib/utils'
 import type { ExpenseCategory } from '@/types'
 import { useT, type TranslationKey } from '@/i18n'
+
+const marketingLink = getLinkById('link-sara-noor')!
+const marketingProvider = getNode(marketingLink.toId)!
 
 const icons: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
   utensils: Utensils,
@@ -18,8 +25,10 @@ const icons: Record<string, React.ComponentType<{ size?: number; className?: str
 }
 
 export function BudgetOptimizer() {
+  const navigate = useNavigate()
   const [categories, setCategories] = useState<ExpenseCategory[]>(defaultExpenseCategories)
   const { t, language } = useT()
+  const marketingSpend = categories.find((c) => c.id === 'marketing')?.amount ?? 0
 
   const baselineSavings = useMemo(() => monthlySavings(defaultExpenseCategories), [])
   const currentSavings = useMemo(() => monthlySavings(categories), [categories])
@@ -83,9 +92,9 @@ export function BudgetOptimizer() {
           <motion.div layout className="rounded-2xl bg-[#f6fbfc] border border-sdb-cyan/15 p-5">
             <p className="text-[11px] font-bold uppercase tracking-wide text-[#8996a0]">{t('budget.timeToGoal')}</p>
             <div className="mt-1.5 flex items-baseline gap-2">
-              <span className="text-[15px] font-medium text-[#95a2a9] line-through">{Number.isFinite(baselineMonths) ? t('savings.nMonths', { count: baselineMonths }) : '—'}</span>
+              <span className="text-[15px] font-medium text-[#95a2a9] line-through">{Number.isFinite(baselineMonths) ? t('savings.nMonths', { count: baselineMonths }) : 'n/a'}</span>
               <span className={improved ? 'text-[26px] font-extrabold text-sdb-green' : 'text-[26px] font-extrabold text-sdb-deep'}>
-                {Number.isFinite(currentMonths) ? t('savings.nMonths', { count: currentMonths }) : '—'}
+                {Number.isFinite(currentMonths) ? t('savings.nMonths', { count: currentMonths }) : 'n/a'}
               </span>
             </div>
           </motion.div>
@@ -96,6 +105,27 @@ export function BudgetOptimizer() {
               {t('budget.disclaimer', { amount: sar(MONTHLY_AVAILABLE) })}
             </p>
           </div>
+
+          {marketingSpend > 0 && (
+            <button
+              onClick={() => navigate('/beneficiary/matches')}
+              className="rounded-xl border border-sdb-cyan/20 bg-[#f6fbfc] p-3.5 text-left hover:border-sdb-cyan/40 transition-colors cursor-pointer"
+            >
+              <div className="flex items-center gap-1.5 text-sdb-cyan mb-1.5">
+                <Sparkles size={12} />
+                <span className="text-[10.5px] font-bold uppercase tracking-wide">Ecosystem suggestion</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Avatar initials={marketingProvider.initials} color={marketingProvider.avatarColor} size={26} />
+                <p className="text-[12px] leading-relaxed text-[#3f4d55]">
+                  You're spending {formatSAR(marketingSpend)}/month on marketing. {marketingProvider.name} is a {marketingLink.matchScore}% AI match inside the ecosystem.
+                </p>
+              </div>
+              <span className="mt-2 flex items-center gap-1 text-[11.5px] font-semibold text-sdb-cyan">
+                See the match <ArrowRight size={11} />
+              </span>
+            </button>
+          )}
         </div>
       </div>
     </div>

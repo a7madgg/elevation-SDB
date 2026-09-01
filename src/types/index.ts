@@ -149,3 +149,112 @@ export interface Insight {
 export type UserRole = 'beneficiary' | 'employee' | null
 
 export type Language = 'en' | 'ar'
+
+// ---------------------------------------------------------------------------
+// Ecosystem Matches / Business Resilience (major MVP update)
+// ---------------------------------------------------------------------------
+
+export type ConnectionType = 'Customer' | 'Supplier' | 'Partner' | 'Freelancer' | 'Mentor' | 'Opportunity'
+
+/** A unified beneficiary node used by the Ecosystem Graph and Ecosystem Matches. Every
+ * provider can also have unmet needs, and every "needer" (like Sara's Kitchen) can also
+ * appear as a node with things it might one day provide. */
+export interface EcosystemNode {
+  id: string
+  name: string
+  businessLabel?: string
+  category: BeneficiaryCategory
+  city: SaudiCity
+  avatarColor: string
+  initials: string
+  needs: ServiceCategory[]
+  provides: ServiceCategory[]
+}
+
+export interface MatchFactor {
+  label: string
+  value: string
+  matched: boolean
+}
+
+export interface CollaborationOpportunity {
+  title: string
+  bullets: string[]
+  outcome: string
+}
+
+export interface CampaignIdea {
+  name: string
+  goal: string
+  duration: string
+  services: string[]
+}
+
+export interface CollaborationPlanWeek {
+  week: number
+  focus: string
+}
+
+export interface CollaborationPlan {
+  goal: string
+  weeks: CollaborationPlanWeek[]
+  reachLiftPct: number
+  efficiencyLiftPct: number
+}
+
+/** A rich, AI-detected relationship between two ecosystem nodes. The centerpiece of the
+ * Ecosystem Matches experience. */
+export interface EcosystemLink {
+  id: string
+  type: ConnectionType
+  fromId: string
+  toId: string
+  matchScore: number
+  factors: MatchFactor[]
+  fromNeeds: string[]
+  toProvides: string[]
+  opportunities: CollaborationOpportunity[]
+  campaign?: CampaignIdea
+  aiRecommendation: string
+}
+
+export type RiskLevel = 'Healthy' | 'Watch' | 'At Risk' | 'Critical'
+
+export interface RiskIndicators {
+  revenueChangePct: number
+  opexChangePct: number
+  cashBufferMonths: number
+  customerAcqChangePct: number
+}
+
+export interface SupportRecommendation {
+  category: ServiceCategory
+  providerId: string
+  matchScore: number
+  provides: string[]
+}
+
+export interface RecoveryPlan {
+  marketingProviderCount: number
+  costOptimizationNote: string
+  recommendedReserve: number
+}
+
+export interface AtRiskBusiness {
+  id: string
+  name: string
+  category: BeneficiaryCategory
+  city: SaudiCity
+  avatarColor: string
+  initials: string
+  riskLevel: RiskLevel
+  indicators: RiskIndicators
+  aiAnalysis: string
+  recoveryPlan: RecoveryPlan
+  supportConnections: SupportRecommendation[]
+}
+
+export interface SupportAction {
+  label: string
+  priority: 'High' | 'Medium' | 'Low'
+}
