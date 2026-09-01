@@ -60,6 +60,10 @@ html {
   scroll-behavior: smooth;
 }
 
+.pitch-slide {
+  min-height: 100svh;
+}
+
 body {
   font-family: var(--font-sans);
   background: #ffffff;

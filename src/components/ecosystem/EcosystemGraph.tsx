@@ -141,7 +141,7 @@ export function EcosystemGraph() {
       </div>
 
       <p className="mt-3 text-center text-[11.5px] text-[#95a2a9]">
-        Hover a business to see its connections · click a node to view its profile · click a line to see why they match
+        Hover a business to see its connections. Click a node to view its profile. Click a line to see why they match.
       </p>
     </div>
   )

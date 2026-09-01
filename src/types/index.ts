@@ -100,6 +100,8 @@ export interface ExpenseCategory {
   max: number
   color: string
   icon: string
+  /** Fixed recurring fee — not adjustable in the optimizer. */
+  locked?: boolean
 }
 
 export interface SavingsGoal {

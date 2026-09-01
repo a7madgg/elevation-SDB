@@ -18,11 +18,13 @@ import { BeforeAfterView } from '@/components/ecosystem/BeforeAfterView'
 import { EcosystemLinkCard } from '@/components/ecosystem/EcosystemLinkCard'
 import { ConnectionModal } from '@/components/ai/ConnectionModal'
 import { useApp } from '@/state/AppContext'
+import { useT } from '@/i18n'
 
 const FLAGSHIP_LINK_ID = 'link-sara-noor'
 
 export default function EcosystemMatches() {
   const navigate = useNavigate()
+  const { t } = useT()
   const { pushToast } = useApp()
   const [connectOpen, setConnectOpen] = useState(false)
 
@@ -62,7 +64,7 @@ export default function EcosystemMatches() {
             <Sparkles size={18} />
           </div>
           <p className="mt-3 text-[16px] font-bold text-sdb-deep">Ready to connect?</p>
-          <p className="mt-1 text-[13px] text-[#6b7a83]">Send {to.name} an AI-drafted message to start the collaboration.</p>
+          <p className="mt-1 text-[13px] text-[#6b7a83]">Send {to.name} a message drafted by AI to start the collaboration.</p>
           <div className="mt-4 flex flex-col items-center justify-center gap-2 sm:flex-row">
             <Button size="lg" onClick={() => setConnectOpen(true)}>
               Connect with {to.name}
@@ -112,7 +114,7 @@ export default function EcosystemMatches() {
 
       <div className="mt-10 flex justify-center">
         <Button variant="ghost" size="sm" onClick={() => navigate('/beneficiary/story')}>
-          See the bigger picture: From Beneficiary to Ecosystem →
+          {t('dashboard.biggerPicture')}
         </Button>
       </div>
 

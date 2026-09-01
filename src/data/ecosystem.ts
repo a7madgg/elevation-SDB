@@ -26,7 +26,7 @@ export const opportunitySignals: OpportunitySignal[] = [
     supplyScore: 38,
     potentialMatches: 1240,
     insight:
-      'There is significant demand for digital marketing services among productive-family businesses, while available providers within the ecosystem remain limited.',
+      'There is significant demand for digital marketing services among productive family businesses, while available providers within the ecosystem remain limited.',
   },
   {
     id: 'opp-packaging',
@@ -37,7 +37,7 @@ export const opportunitySignals: OpportunitySignal[] = [
     supplyScore: 46,
     potentialMatches: 860,
     insight:
-      'Home-based food and retail producers are increasingly requesting branded packaging, outpacing the growth of packaging suppliers in the ecosystem.',
+      'Home based food and retail producers are increasingly requesting branded packaging, outpacing the growth of packaging suppliers in the ecosystem.',
   },
   {
     id: 'opp-tech',
@@ -48,7 +48,7 @@ export const opportunitySignals: OpportunitySignal[] = [
     supplyScore: 24,
     potentialMatches: 540,
     insight:
-      'Small businesses are seeking simple websites and online stores, but very few SDB-financed technology providers currently serve this need.',
+      'Small businesses are seeking simple websites and online stores, but very few financed by SDB technology providers currently serve this need.',
   },
   {
     id: 'opp-logistics',
@@ -81,7 +81,7 @@ export const opportunitySignals: OpportunitySignal[] = [
     supplyScore: 52,
     potentialMatches: 705,
     insight:
-      'Branding and identity demand is closely tracking available design talent, though early-stage entrepreneurs remain underserved.',
+      'Branding and identity demand is closely tracking available design talent, though early stage entrepreneurs remain underserved.',
   },
 ]
 
@@ -144,7 +144,7 @@ export const ecosystemInsights: Insight[] = [
     kind: 'Opportunity',
     title: 'Marketing demand is 2.4× higher than ecosystem supply',
     description:
-      'Productive-family and small-business beneficiaries are requesting marketing support at more than double the rate providers can serve, particularly in Riyadh and Jeddah.',
+      'Productive-family and small business beneficiaries are requesting marketing support at more than double the rate providers can serve, particularly in Riyadh and Jeddah.',
   },
   {
     id: 'ins-2',
@@ -156,7 +156,7 @@ export const ecosystemInsights: Insight[] = [
   {
     id: 'ins-3',
     kind: 'Support',
-    title: 'Early-stage categories need more mentorship & financial planning',
+    title: 'Early stage categories need more mentorship & financial planning',
     description:
       'Beneficiaries in their first 12 months show higher engagement with financial-copilot tools and higher demand for mentorship connections.',
   },

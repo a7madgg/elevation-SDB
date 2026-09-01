@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom'
 import { ArrowRight, Briefcase, Store } from 'lucide-react'
 import { SdbLogo } from '@/components/brand/SdbLogo'
 import { useApp } from '@/state/AppContext'
-import { Avatar } from '@/components/ui/Avatar'
 import { LanguageSwitch } from '@/components/layout/LanguageSwitch'
 import { useT } from '@/i18n'
 
@@ -18,7 +17,11 @@ export default function Login() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[#fafcfc] px-6 py-12">
+    <div className="relative flex min-h-screen items-center justify-center bg-[#fafcfc] px-6 py-12">
+      <div className="absolute top-6 right-6 z-10">
+        <LanguageSwitch />
+      </div>
+
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
@@ -26,9 +29,6 @@ export default function Login() {
         className="w-full max-w-md"
       >
         <div className="mb-8 flex flex-col items-center text-center">
-          <div className="mb-4">
-            <LanguageSwitch />
-          </div>
           <SdbLogo variant="full" className="h-[88px] w-auto" />
           <h1 className="mt-4 text-[22px] font-bold text-sdb-deep">{t('login.title')}</h1>
           <p className="mt-1.5 text-[13.5px] text-[#6b7a83]">{t('login.body')}</p>
@@ -68,11 +68,6 @@ export default function Login() {
             </div>
             <ArrowRight size={16} className="text-[#95a2a9] group-hover:text-sdb-deep group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5 transition-all shrink-0" />
           </motion.button>
-        </div>
-
-        <div className="mt-8 flex items-center justify-center gap-2">
-          <Avatar initials="SQ" color="#0D4066" size={22} />
-          <p className="text-[11.5px] text-[#95a2a9]">{t('login.disclaimer')}</p>
         </div>
       </motion.div>
     </div>

@@ -1,14 +1,14 @@
 import { useRef } from 'react'
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
-import { ArrowRight, GitBranch, PiggyBank, Sparkles, TrendingUp } from 'lucide-react'
+import { ArrowRight, GitBranch, PiggyBank, TrendingUp } from 'lucide-react'
 import { BrandLockup, SdbLogo } from '@/components/brand/SdbLogo'
 import { NetworkHero } from '@/components/network/NetworkHero'
 import { Button } from '@/components/ui/Button'
 import { AnimatedNumber } from '@/components/ui/AnimatedNumber'
 import { formatCompact } from '@/lib/utils'
 import { ecosystemOverview } from '@/data/ecosystem'
-import { TransformationStory } from '@/components/story/TransformationStory'
+import { PitchPresentation } from '@/components/story/PitchPresentation'
 import { LanguageSwitch } from '@/components/layout/LanguageSwitch'
 import { useT } from '@/i18n'
 
@@ -59,9 +59,7 @@ export default function Landing() {
 
       <section className="mx-auto grid max-w-7xl items-center gap-10 px-6 pt-10 pb-16 lg:grid-cols-2 lg:gap-6 lg:px-10 lg:pt-16">
         <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}>
-          <div className="inline-flex items-center gap-1.5 rounded-full border border-sdb-cyan/25 bg-sdb-cyan/[0.07] px-3 py-1 text-[12px] font-semibold text-[#0a8b9c]">
-            <Sparkles size={13} /> {t('landing.badge')}
-          </div>
+          <p className="text-[13px] font-semibold text-[#0a8b9c]">{t('landing.badge')}</p>
           <h1 className="mt-5 text-[38px] sm:text-[48px] lg:text-[54px] font-extrabold leading-[1.06] text-sdb-deep text-balance">
             {t('brand.name')}
           </h1>
@@ -104,7 +102,7 @@ export default function Landing() {
         </div>
       </section>
 
-      <section ref={howRef} className="mx-auto max-w-7xl px-6 py-20 lg:px-10">
+      <section className="mx-auto max-w-7xl px-6 py-20 lg:px-10">
         <div className="mx-auto max-w-2xl text-center">
           <p className="text-[12.5px] font-bold uppercase tracking-wider text-sdb-cyan">{t('landing.howEyebrow')}</p>
           <h2 className="mt-2 text-[28px] sm:text-[34px] font-bold text-sdb-deep text-balance">
@@ -135,10 +133,8 @@ export default function Landing() {
         </div>
       </section>
 
-      <section className="bg-[#fafcfc] border-y border-sdb-deep/[0.06]">
-        <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10">
-          <TransformationStory />
-        </div>
+      <section ref={howRef} className="w-full">
+        <PitchPresentation />
       </section>
 
       <section className="mx-auto max-w-7xl px-6 py-16 text-center lg:px-10">
@@ -150,9 +146,8 @@ export default function Landing() {
       </section>
 
       <footer className="border-t border-sdb-deep/[0.06] py-10">
-        <div className="flex flex-col items-center gap-4">
+        <div className="flex flex-col items-center">
           <SdbLogo variant="full" className="h-[72px] w-auto" />
-          <p className="text-[12px] text-[#95a2a9]">{t('landing.footer')}</p>
         </div>
       </footer>
     </div>

@@ -64,7 +64,7 @@ export default function ConnectionDetail() {
             <Sparkles size={18} />
           </div>
           <p className="mt-3 text-[16px] font-bold text-sdb-deep">Ready to connect?</p>
-          <p className="mt-1 text-[13px] text-[#6b7a83]">Send {to.name} an AI-drafted message to start the collaboration.</p>
+          <p className="mt-1 text-[13px] text-[#6b7a83]">Send {to.name} a message drafted by AI to start the collaboration.</p>
           <div className="mt-4 flex flex-col items-center justify-center gap-2 sm:flex-row">
             <Button size="lg" disabled={!provider} onClick={() => setConnectOpen(true)}>
               Connect with {to.name}

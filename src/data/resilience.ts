@@ -38,7 +38,7 @@ export const atRiskBusinesses: AtRiskBusiness[] = [
       'Early indicators suggest significant financial pressure. Revenue has declined sharply alongside rising costs, leaving very little cash buffer to absorb a slow month.',
     recoveryPlan: {
       marketingProviderCount: 5,
-      costOptimizationNote: 'Review ingredient sourcing and delivery contracts for near-term savings.',
+      costOptimizationNote: 'Review ingredient sourcing and delivery contracts for near term savings.',
       recommendedReserve: 14400,
     },
     supportConnections: [
@@ -116,7 +116,7 @@ export const atRiskBusinesses: AtRiskBusiness[] = [
       'Early indicators suggest significant financial pressure. Declining revenue combined with a thin cash buffer means limited room to absorb further disruption.',
     recoveryPlan: {
       marketingProviderCount: 3,
-      costOptimizationNote: 'Review packaging and delivery costs for near-term savings.',
+      costOptimizationNote: 'Review packaging and delivery costs for near term savings.',
       recommendedReserve: 15200,
     },
     supportConnections: [

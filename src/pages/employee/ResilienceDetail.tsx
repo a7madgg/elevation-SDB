@@ -42,7 +42,7 @@ export default function ResilienceDetail() {
               <div>
                 <h1 className="text-[19px] font-bold text-sdb-deep">{business.name}</h1>
                 <p className="text-[13px] text-[#6b7a83]">
-                  {business.category} · {business.city}
+                  {business.category}, {business.city}
                 </p>
               </div>
             </div>
@@ -77,7 +77,7 @@ export default function ResilienceDetail() {
         <div className="mt-8">
           <p className="text-[13px] font-bold text-sdb-deep mb-1">Ecosystem support connections</p>
           <p className="text-[13px] text-[#6b7a83] mb-4">
-            AI-matched providers within the SDB ecosystem who could support {business.name} right now.
+            Providers matched by AI within the SDB ecosystem who could support {business.name} right now.
           </p>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {business.supportConnections.map((s, i) => (

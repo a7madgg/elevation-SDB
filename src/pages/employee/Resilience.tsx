@@ -72,7 +72,7 @@ export default function Resilience() {
               <div className="min-w-0 flex-1">
                 <p className="truncate text-[14px] font-bold text-sdb-deep">{biz.name}</p>
                 <p className="truncate text-[12.5px] text-[#6b7a83]">
-                  {biz.category} · {biz.city}
+                  {biz.category}, {biz.city}
                 </p>
               </div>
               <div className="hidden sm:flex flex-col items-end text-right">

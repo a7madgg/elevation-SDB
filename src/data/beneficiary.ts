@@ -13,13 +13,15 @@ export const currentBeneficiary: Beneficiary = {
   financingDate: '2025-02-14',
 }
 
+// Sums to August cash-flow expenses (6,050) so the copilot chart, insight, and optimizer match.
 export const defaultExpenseCategories: ExpenseCategory[] = [
-  { id: 'food', label: 'Ingredients & Supplies', amount: 1450, min: 800, max: 2200, color: '#34B889', icon: 'utensils' },
-  { id: 'marketing', label: 'Marketing', amount: 620, min: 200, max: 1200, color: '#12B1C6', icon: 'megaphone' },
-  { id: 'transport', label: 'Transportation', amount: 340, min: 100, max: 700, color: '#0074AE', icon: 'truck' },
-  { id: 'operations', label: 'Operations', amount: 510, min: 200, max: 900, color: '#44546A', icon: 'settings' },
-  { id: 'subscriptions', label: 'Subscriptions', amount: 180, min: 50, max: 400, color: '#70154C', icon: 'repeat' },
-  { id: 'other', label: 'Other', amount: 260, min: 0, max: 600, color: '#97ACB6', icon: 'more-horizontal' },
+  { id: 'food', label: 'Ingredients & Supplies', amount: 2200, min: 1200, max: 3200, color: '#34B889', icon: 'utensils' },
+  { id: 'marketing', label: 'Marketing', amount: 980, min: 400, max: 1800, color: '#12B1C6', icon: 'megaphone' },
+  { id: 'transport', label: 'Transportation', amount: 720, min: 300, max: 1200, color: '#0074AE', icon: 'truck' },
+  { id: 'operations', label: 'Operations', amount: 980, min: 400, max: 1600, color: '#44546A', icon: 'settings' },
+  { id: 'sdbConnect', label: 'SDB Connect', amount: 49, min: 49, max: 49, color: '#0D4066', icon: 'repeat', locked: true },
+  { id: 'subscriptions', label: 'Subscriptions', amount: 271, min: 80, max: 550, color: '#70154C', icon: 'repeat' },
+  { id: 'other', label: 'Other', amount: 850, min: 200, max: 1400, color: '#97ACB6', icon: 'more-horizontal' },
 ]
 
 export const savingsGoal: SavingsGoal = {
