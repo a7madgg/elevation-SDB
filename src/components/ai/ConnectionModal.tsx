@@ -44,15 +44,16 @@ export function ConnectionModal({ provider, open, onClose, contextNote }: Connec
 
   if (!provider) return null
 
-  const localized = localizeProvider(provider, t)
+  const selected = provider
+  const localized = localizeProvider(selected, t)
 
   async function handleSend() {
     setStep('sending')
     await sleep(1400)
     addConnection({
       id: uid('conn'),
-      providerId: provider.id,
-      providerName: provider.name,
+      providerId: selected.id,
+      providerName: selected.name,
       status: 'sent',
       message,
       sentAt: new Date().toISOString(),
@@ -61,7 +62,7 @@ export function ConnectionModal({ provider, open, onClose, contextNote }: Connec
     setStep('sent')
     pushToast({
       title: t('connect.toastTitle'),
-      description: t('connect.toastBody', { name: provider.name }),
+      description: t('connect.toastBody', { name: selected.name }),
       variant: 'success',
     })
   }

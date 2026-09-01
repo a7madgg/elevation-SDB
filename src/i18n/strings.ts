@@ -199,6 +199,18 @@ export const en = {
   'copilot.notAdvice': 'AI-generated estimate. Not financial advice.',
   'copilot.exploreOptimizer': 'Explore the budget optimizer below to see it happen live.',
   'copilot.optimize': 'Optimize my budget',
+  'copilot.sdbValue.eyebrow': 'SDB Connect value',
+  'copilot.sdbValue.title': 'A small monthly fee that keeps the ecosystem working.',
+  'copilot.sdbValue.body':
+    '{business} stays connected to matches, the Financial Copilot, and early support — for a simple monthly subscription, not another loan.',
+  'copilot.sdbValue.saraPays': 'Sara pays',
+  'copilot.sdbValue.active': 'Active subscription',
+  'copilot.sdbValue.sdbReceives': 'SDB receives',
+  'copilot.sdbValue.continuous': 'Continuous platform revenue',
+  'copilot.sdbValue.scaleLabel': 'At ecosystem scale',
+  'copilot.sdbValue.scaleBody':
+    'If {count} small businesses stay active at {fee}/month, SDB Connect can generate about {total} every month.',
+  'copilot.sdbValue.notLoan': 'This is platform value. It is not additional financing.',
 
   'budget.title': 'AI Budget Optimizer',
   'budget.desc': 'Drag any category to see your savings and goal timeline update instantly.',
@@ -905,6 +917,18 @@ export const ar: Record<TranslationKey, string> = {
   'copilot.notAdvice': 'تقدير مولَّد بالذكاء الاصطناعي. وليس استشارة مالية.',
   'copilot.exploreOptimizer': 'استكشف محسّن الميزانية أدناه لترى التغيير مباشرة.',
   'copilot.optimize': 'حسّن ميزانيتي',
+  'copilot.sdbValue.eyebrow': 'قيمة SDB Connect',
+  'copilot.sdbValue.title': 'رسوم شهرية صغيرة تُبقي المنظومة عاملة.',
+  'copilot.sdbValue.body':
+    'تبقى {business} متصلة بالتطابقات والمساعد المالي والدعم المبكر — باشتراك شهري بسيط، وليس بقرض إضافي.',
+  'copilot.sdbValue.saraPays': 'تدفع سارة',
+  'copilot.sdbValue.active': 'اشتراك نشط',
+  'copilot.sdbValue.sdbReceives': 'يستلم البنك',
+  'copilot.sdbValue.continuous': 'إيراد منصة مستمر',
+  'copilot.sdbValue.scaleLabel': 'على نطاق المنظومة',
+  'copilot.sdbValue.scaleBody':
+    'إذا بقيت {count} منشأة صغيرة نشطة مقابل {fee}/شهر، يمكن لـ SDB Connect أن يولّد نحو {total} كل شهر.',
+  'copilot.sdbValue.notLoan': 'هذه قيمة المنصة. وليست تمويلاً إضافيًا.',
 
   'budget.title': 'محسّن الميزانية الذكي',
   'budget.desc': 'حرّك أي فئة لترى ادخارك والجدول الزمني للهدف يتحدّثان فورًا.',
