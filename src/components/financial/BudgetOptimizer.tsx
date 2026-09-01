@@ -1,11 +1,18 @@
 import { useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
-import { Info, Sparkles, Utensils, Megaphone, Truck, Settings, Repeat, MoreHorizontal } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
+import { ArrowRight, Info, Sparkles, Utensils, Megaphone, Truck, Settings, Repeat, MoreHorizontal } from 'lucide-react'
 import { defaultExpenseCategories, savingsGoal } from '@/data/beneficiary'
 import { monthlySavings, monthsToGoal, MONTHLY_AVAILABLE } from '@/lib/financialEngine'
+import { getLinkById } from '@/data/ecosystemLinks'
+import { getNode } from '@/data/ecosystemGraph'
 import { AnimatedNumber } from '@/components/ui/AnimatedNumber'
+import { Avatar } from '@/components/ui/Avatar'
 import { formatSAR } from '@/lib/utils'
 import type { ExpenseCategory } from '@/types'
+
+const marketingLink = getLinkById('link-sara-noor')!
+const marketingProvider = getNode(marketingLink.toId)!
 
 const icons: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
   utensils: Utensils,
@@ -17,7 +24,9 @@ const icons: Record<string, React.ComponentType<{ size?: number; className?: str
 }
 
 export function BudgetOptimizer() {
+  const navigate = useNavigate()
   const [categories, setCategories] = useState<ExpenseCategory[]>(defaultExpenseCategories)
+  const marketingSpend = categories.find((c) => c.id === 'marketing')?.amount ?? 0
 
   const baselineSavings = useMemo(() => monthlySavings(defaultExpenseCategories), [])
   const currentSavings = useMemo(() => monthlySavings(categories), [categories])
@@ -93,6 +102,27 @@ export function BudgetOptimizer() {
               This is an AI-generated estimate for illustration, based on {formatSAR(MONTHLY_AVAILABLE)}/month available — not financial advice.
             </p>
           </div>
+
+          {marketingSpend > 0 && (
+            <button
+              onClick={() => navigate('/beneficiary/matches')}
+              className="rounded-xl border border-sdb-cyan/20 bg-[#f6fbfc] p-3.5 text-left hover:border-sdb-cyan/40 transition-colors cursor-pointer"
+            >
+              <div className="flex items-center gap-1.5 text-sdb-cyan mb-1.5">
+                <Sparkles size={12} />
+                <span className="text-[10.5px] font-bold uppercase tracking-wide">Ecosystem suggestion</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Avatar initials={marketingProvider.initials} color={marketingProvider.avatarColor} size={26} />
+                <p className="text-[12px] leading-relaxed text-[#3f4d55]">
+                  You're spending {formatSAR(marketingSpend)}/month on marketing — {marketingProvider.name} is a {marketingLink.matchScore}% AI match inside the ecosystem.
+                </p>
+              </div>
+              <span className="mt-2 flex items-center gap-1 text-[11.5px] font-semibold text-sdb-cyan">
+                See the match <ArrowRight size={11} />
+              </span>
+            </button>
+          )}
         </div>
       </div>
     </div>

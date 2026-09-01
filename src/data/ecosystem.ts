@@ -171,6 +171,13 @@ export const cityDistribution = [
   { city: 'Other', value: 6 },
 ]
 
+export const ecosystemPotential = {
+  potentialConnections: 4230,
+  unmetNeeds: 1240,
+  potentialCollaborations: 2870,
+  businessesNeedingSupport: 640,
+}
+
 export const wellbeingTrend = [
   { month: 'Mar', score: 68 },
   { month: 'Apr', score: 70 },

@@ -17,6 +17,8 @@ import Savings from '@/pages/beneficiary/Savings'
 import Notifications from '@/pages/beneficiary/Notifications'
 import ProviderProfile from '@/pages/beneficiary/ProviderProfile'
 import Story from '@/pages/beneficiary/Story'
+import EcosystemMatches from '@/pages/beneficiary/EcosystemMatches'
+import ConnectionDetail from '@/pages/beneficiary/ConnectionDetail'
 
 import Overview from '@/pages/employee/Overview'
 import Ecosystem from '@/pages/employee/Ecosystem'
@@ -24,6 +26,8 @@ import Opportunities from '@/pages/employee/Opportunities'
 import AIMatches from '@/pages/employee/AIMatches'
 import Beneficiaries from '@/pages/employee/Beneficiaries'
 import Insights from '@/pages/employee/Insights'
+import Resilience from '@/pages/employee/Resilience'
+import ResilienceDetail from '@/pages/employee/ResilienceDetail'
 
 function BeneficiaryLayout({ children }: { children: React.ReactNode }) {
   const { role } = useApp()
@@ -76,6 +80,8 @@ export default function App() {
         <Route path="/beneficiary/notifications" element={<BeneficiaryLayout><Notifications /></BeneficiaryLayout>} />
         <Route path="/beneficiary/profile/:id" element={<BeneficiaryLayout><ProviderProfile /></BeneficiaryLayout>} />
         <Route path="/beneficiary/story" element={<BeneficiaryLayout><Story /></BeneficiaryLayout>} />
+        <Route path="/beneficiary/matches" element={<BeneficiaryLayout><EcosystemMatches /></BeneficiaryLayout>} />
+        <Route path="/beneficiary/matches/:connectionId" element={<BeneficiaryLayout><ConnectionDetail /></BeneficiaryLayout>} />
 
         <Route path="/employee" element={<EmployeeLayout><Overview /></EmployeeLayout>} />
         <Route path="/employee/ecosystem" element={<EmployeeLayout><Ecosystem /></EmployeeLayout>} />
@@ -83,6 +89,8 @@ export default function App() {
         <Route path="/employee/matches" element={<EmployeeLayout><AIMatches /></EmployeeLayout>} />
         <Route path="/employee/beneficiaries" element={<EmployeeLayout><Beneficiaries /></EmployeeLayout>} />
         <Route path="/employee/insights" element={<EmployeeLayout><Insights /></EmployeeLayout>} />
+        <Route path="/employee/resilience" element={<EmployeeLayout><Resilience /></EmployeeLayout>} />
+        <Route path="/employee/resilience/:id" element={<EmployeeLayout><ResilienceDetail /></EmployeeLayout>} />
 
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

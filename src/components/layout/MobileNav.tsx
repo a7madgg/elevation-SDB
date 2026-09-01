@@ -3,7 +3,7 @@ import type { NavItem } from './navConfig'
 import { cn } from '@/lib/utils'
 
 export function MobileNav({ items }: { items: NavItem[] }) {
-  const shown = items.slice(0, 5)
+  const shown = items.slice(0, 6)
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-40 flex items-center justify-around border-t border-sdb-deep/[0.08] bg-white/95 backdrop-blur px-1 py-1.5 lg:hidden">
       {shown.map((item) => (
